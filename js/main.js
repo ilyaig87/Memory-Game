@@ -62,10 +62,12 @@ function flipCard(num) {
 }
 
 function openModal() {
+  const eldiv = document.querySelector('.box-container')
   const elModal = document.querySelector('.modal-box')
   const elContainer = document.querySelector('.container')
   elModal.classList.remove('display-none')
   elContainer.classList.add('display-none')
+  eldiv.classList.add('display-none')
 }
 
 function restartGame() {
@@ -80,6 +82,8 @@ function restartGame() {
 }
 
 function gameSize(size) {
+  let startBtn = document.querySelector('.start')
+  startBtn.style.display = 'inline-block'
   let colorsArr = []
   colorsArr = createCards(size)
   renderCards(size)
