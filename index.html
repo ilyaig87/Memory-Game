@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grid-EX</title>
+    <link rel="stylesheet" href="js/lib/bootstrap.css" />
+    <link rel="stylesheet" href="js/style.css" />
+  </head>
+  <body>
+    <section class="main-layout">
+      <div class="main-container">
+        <h1>Memory Game!</h1>
+        <button onclick="onInit()" class="start btn btn-primary">
+          Are You Ready?
+        </button>
+
+        <section class="levels main-layout">
+          <button class="btn btn-success" onclick="gameSize(16)">Easy</button>
+          <button class="btn btn-warning" onclick="gameSize(36)">Normal</button>
+          <button class="btn btn-danger" onclick="gameSize(64)">Expert</button>
+        </section>
+      </div>
+
+      <div class="container" id="box">
+        <!-- <div class="item item1 hide" onclick="getButton(1)" ></div> -->
+        <!-- <div class="item item2 hide" onclick="getButton(2)"></div>
+                <div class="item item3 hide" onclick="getButton(3)"></div>
+                <div class="item item4 hide" onclick="getButton(4)"></div>
+                <div class="item item5 hide" onclick="getButton(5)"></div>
+                <div class="item item6 hide" onclick="getButton(6)"></div>
+                <div class="item item7 hide" onclick="getButton(7)"></div>
+                <div class="item item8 hide" onclick="getButton(8)"></div> -->
+        <!-- <div class="item item9 hide" onclick="getButton(9)"></div> -->
+      </div>
+          <div class='modal-box black'>
+            <h1>You Won!</h1>
+            <button class="btn btn-success" onclick='restartGame()'>Restart</button>
+          </div>
+        </div>
+      </section>
+    </section>
+  </body>
+  <script src="js/lib/bootstrap.bundel.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/utils/utils.js"></script>
+</html>
