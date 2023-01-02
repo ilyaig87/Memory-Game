@@ -114,7 +114,7 @@ function renderCards(size) {
   let strHTML = ''
   for (let i = 1; i <= size; i++) {
     strHTML += `   
-    <div id=${i} class="item item${i} " onclick="flipCard(${i})"></div>
+    <div id=${i} class="item item${i} hide" onclick="flipCard(${i})"></div>
     `
     document.getElementById(
       `box`

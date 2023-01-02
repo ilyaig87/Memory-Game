@@ -287,6 +287,5 @@ function createCards(num) {
   for (let i = 0; i < num / 2; i++) {
     cards.push({ id: i + 1, color: colors[i], isShown: false })
   }
-  console.log(cards)
   return cards
 }
