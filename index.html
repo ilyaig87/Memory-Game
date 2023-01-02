@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="js/style.css" />
   </head>
   <body>
+    
     <section class="main-layout">
+      
       <div class="main-container">
         <h1>Memory Game!</h1>
         <button onclick="onInit()" class="start btn btn-primary">
@@ -17,13 +19,14 @@
         </button>
 
         <section class="levels main-layout">
-          <button class="btn btn-success" onclick="gameSize(16)">Easy</button>
-          <button class="btn btn-warning" onclick="gameSize(36)">Normal</button>
-          <button class="btn btn-danger" onclick="gameSize(64)">Expert</button>
+          <button class="btn btn-success size" onclick="gameSize(16)">Easy</button>
+          <button class="btn btn-warning size" onclick="gameSize(36)">Normal</button>
+          <button class="btn btn-danger size" onclick="gameSize(64)">Expert</button>
         </section>
       </div>
 
       <div class="container" id="box">
+
         <!-- <div class="item item1 hide" onclick="getButton(1)" ></div> -->
         <!-- <div class="item item2 hide" onclick="getButton(2)"></div>
                 <div class="item item3 hide" onclick="getButton(3)"></div>

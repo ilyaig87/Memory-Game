@@ -2,11 +2,38 @@
   box-sizing: border-box;
 }
 
+h1 {
+  font-size: 90px;
+  font-weight: 600;
+  font-family: 'Niconne', cursive;
+  color: #0dcd8d;
+  text-shadow: 2px 2px 0px #957dad, 4px 4px 0px #ee4b2b, 6px 6px 0px #00c2cb,
+    8px 8px 0px #ff7f50, 10px 10px 0px #553c9a;
+  padding: 25px;
+}
+img {
+  display: absolute;
+}
+.btn.start {
+  height: 50px;
+  width: 300px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: large;
+}
+
+.btn.size {
+  width: 97px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 700;
+  color: black;
+}
+
 body {
   height: 100vh;
+  background-image: url('https://i.stack.imgur.com/TUou4.png');
 }
 .main-layout {
-  max-width: 980px;
+  min-width: 980px;
 }
 .flex {
   display: flex;
@@ -69,14 +96,12 @@ body {
 }
 
 .hide {
-  background: rgb(67, 237, 141);
-  background: radial-gradient(
-    circle,
-    rgba(67, 237, 141, 1) 19%,
-    rgba(59, 245, 209, 1) 37%,
-    rgba(59, 131, 245, 0.5662640056022409) 52%,
-    rgba(195, 96, 205, 1) 70%,
-    rgba(219, 124, 132, 0.5970763305322129) 96%
+  background: rgb(131, 58, 180);
+  background: linear-gradient(
+    101deg,
+    rgba(131, 58, 180, 21) 0%,
+    rgba(164, 111, 111, 21) 39%,
+    rgba(252, 176, 69, 21) 100%
   );
 }
 

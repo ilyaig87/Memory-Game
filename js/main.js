@@ -13,11 +13,25 @@ function counter() {
   return gCounter
 }
 
-function onInit() {
+function disableBtns() {
   document.querySelector('.start').disabled = true
+  const buttons = document.querySelectorAll('.size')
+  for (const button of buttons) {
+    button.setAttribute('disabled', true)
+  }
+}
+
+function showColors() {
   document.querySelectorAll(`.item`).forEach(function (elDiv) {
     elDiv.classList.remove('hide')
   })
+}
+
+renderCards(16)
+
+function onInit() {
+  disableBtns()
+  showColors()
   setTimeout(changeToWhite, 2000)
 }
 
@@ -29,11 +43,12 @@ function changeToWhite() {
 }
 
 function flipCard(num) {
+  if (!gameIsOn) return
+
   const elDiv = document.querySelector(`.item${num}`)
   const elModal = document.querySelector('.modal-box')
   const elContainer = document.querySelector('.container')
 
-  console.log(elModal)
   gDivArray.push(elDiv)
 
   let currColor = elDiv.style.backgroundColor
@@ -46,7 +61,6 @@ function flipCard(num) {
       gameIsOn = false
       if (gCompareArray[0] === gCompareArray[1]) {
         gScore--
-        console.log(gScore)
         if (gScore === 0) {
           elModal.classList.remove('black')
           elContainer.classList.add('black')
@@ -89,8 +103,6 @@ function gameSize(size) {
   gRandomColors.push(makeColor(gColors))
   let randomColors = gRandomColors.pop()
   makeShuffleColors(randomColors, randomColors.length, size)
-
-  document.querySelector('.levels').hidden = true
 }
 
 function renderCards(size) {
