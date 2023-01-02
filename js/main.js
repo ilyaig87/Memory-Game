@@ -9,15 +9,18 @@ let gCounter = 2
 let gDivArray = []
 let gScore = 0
 
-function counter() {
-  return gCounter
-}
-
 function disableBtns() {
   document.querySelector('.start').disabled = true
   const buttons = document.querySelectorAll('.size')
   for (const button of buttons) {
     button.setAttribute('disabled', true)
+  }
+}
+function enableBtns() {
+  document.querySelector('.start').disabled = false
+  const buttons = document.querySelectorAll('.size')
+  for (const button of buttons) {
+    button.setAttribute('disabled', false)
   }
 }
 
@@ -26,8 +29,6 @@ function showColors() {
     elDiv.classList.remove('hide')
   })
 }
-
-renderCards(16)
 
 function onInit() {
   disableBtns()
@@ -44,13 +45,8 @@ function changeToWhite() {
 
 function flipCard(num) {
   if (!gameIsOn) return
-
   const elDiv = document.querySelector(`.item${num}`)
-  const elModal = document.querySelector('.modal-box')
-  const elContainer = document.querySelector('.container')
-
   gDivArray.push(elDiv)
-
   let currColor = elDiv.style.backgroundColor
   gCompareArray.push(currColor)
 
@@ -62,8 +58,7 @@ function flipCard(num) {
       if (gCompareArray[0] === gCompareArray[1]) {
         gScore--
         if (gScore === 0) {
-          elModal.classList.remove('black')
-          elContainer.classList.add('black')
+          openModal()
         }
         gDivArray = []
       } else {
@@ -77,15 +72,21 @@ function flipCard(num) {
       gCounter = 2
       gameIsOn = true
     }
-  } else return false
+  } else return
+}
+
+function openModal() {
+  const elModal = document.querySelector('.modal-box')
+  const elContainer = document.querySelector('.container')
+  elModal.classList.remove('display-none')
+  elContainer.classList.add('display-none')
 }
 
 function restartGame() {
   const elModal = document.querySelector('.modal-box')
   elModal.classList.add('black')
+  enableBtns()
 
-  document.querySelector('.start').disabled = false
-  document.querySelector('.levels').hidden = false
   gameIsOn = false
   gCounter = 2
   gDivArray = []
@@ -108,6 +109,7 @@ function gameSize(size) {
 function renderCards(size) {
   let strHTML = ''
   for (let i = 1; i <= size; i++) {
+    createCards(i)
     strHTML += `   
     <div id=${i} class="item item${i} hide" onclick="flipCard(${i})"></div>
     `

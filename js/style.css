@@ -48,6 +48,12 @@ body {
   padding-bottom: 25px;
 }
 
+.modal-box {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+
 .container {
   min-height: 100%;
   display: grid;
@@ -61,34 +67,6 @@ body {
   border: 2px dotted black;
   border-radius: 100%;
 }
-
-.item:hover {
-}
-
-/* .item1 {
-  background-color: rgb(7, 247, 255);
-}
-.item2 {
-  background-color: rgb(255, 8, 8);
-}
-.item3 {
-  background-color: rgb(255, 140, 0);
-}
-.item4 {
-  background-color: rgb(134, 98, 240);
-}
-.item5 {
-  background-color: rgb(7, 247, 255);
-}
-.item6 {
-  background-color: rgb(134, 98, 240);
-}
-.item7 {
-  background-color: rgb(255, 8, 8);
-}
-.item8 {
-  background-color: rgb(255, 140, 0);
-} */
 
 .white {
   background-color: rgb(251, 248, 248);
@@ -109,6 +87,6 @@ body {
   padding: 10px;
 }
 
-.black {
+.display-none {
   display: none;
 }
