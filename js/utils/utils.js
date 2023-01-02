@@ -285,7 +285,7 @@ function createCards(num) {
   ]
   shuffle(colors)
   for (let i = 0; i < num / 2; i++) {
-    cards.push({ id: i + 1, color: colors[i], isShown: false })
+    cards.push({ color: colors[i], isShown: false })
   }
   return cards
 }
