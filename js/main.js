@@ -98,20 +98,23 @@ function restartGame() {
 // }
 
 function gameSize(size) {
+  let colorsArr = []
+  renderCards(size)
+  colorsArr = createCards(size)
+  makeShuffleColors(colorsArr, size)
+
   gColors = size / 2
   gScore = gColors
-  renderCards(size)
-  gRandomColors.push(makeColor(gColors))
-  let randomColors = gRandomColors.pop()
-  makeShuffleColors(randomColors, randomColors.length, size)
+  // gRandomColors.push(makeColor(gColors))
+  // let randomColors = gRandomColors.pop()
+  // makeShuffleColors(randomColors, randomColors.length, size)
 }
 
 function renderCards(size) {
   let strHTML = ''
   for (let i = 1; i <= size; i++) {
-    createCards(i)
     strHTML += `   
-    <div id=${i} class="item item${i} hide" onclick="flipCard(${i})"></div>
+    <div id=${i} class="item item${i} " onclick="flipCard(${i})"></div>
     `
     document.getElementById(
       `box`
@@ -120,20 +123,32 @@ function renderCards(size) {
       size
     )}, 75px)`
   }
-
   const elContainer = document.querySelector('.container')
   elContainer.innerHTML = strHTML
 }
 
-function makeShuffleColors(colors, num, size) {
-  let newColorArray = []
-  newColorArray = ([...colors] + ',' + [...colors]).split(',')
-  let shuffled = shuffle(newColorArray)
-  for (let i = 1; i < size + 1; i++) {
-    let elDiv = document.getElementById(`${i}`)
-    elDiv.style.backgroundColor = shuffled[i - 1]
+function makeShuffleColors(colorsArr, size) {
+  const copy = colorsArr.slice()
+  const newArray = colorsArr.concat(copy)
+  let shuffled = shuffle(newArray)
+  for (let i = 0; i < size; i++) {
+    // console.log(shuffled[i])
+    let elDiv = document.getElementById(`${i + 1}`)
+    elDiv.style.backgroundColor = shuffled[i].color
   }
 }
+// function makeShuffleColors(colorsArr, size) {
+//   console.log(colorsArr)
+//   console.log(size)
+//   let newColorArray = []
+//   newColorArray = ([...colorsArr] + ',' + [...colorsArr]).split(',')
+//   let shuffled = shuffle(newColorArray)
+//   console.log(shuffled)
+//   for (let i = 1; i < size + 1; i++) {
+//     let elDiv = document.getElementById(`${i}`)
+//     elDiv.style.backgroundColor = shuffled[i - 1]
+//   }
+// }
 
 // function getButton(num) {
 //   const elDiv = document.querySelector(`.item${num}`)
