@@ -9,10 +9,12 @@ let gDivArray = []
 let gScore = 0
 let gGameObjArray = []
 let gColorsArray = []
+let gDisableBtns = false
 
 function onInit() {
-  disableBtns()
-  showColors()
+  toggleButtons()
+  gDisableBtns = true
+  flashCards()
   setTimeout(changeToWhite, 2000)
 }
 
@@ -33,8 +35,8 @@ function flipCard(num) {
   gDivArray.push(elDiv)
   let currColor = elDiv.style.backgroundColor
   gCompareArray.push(currColor)
-
   elDiv.classList.remove('hide')
+
   gCounter--
   if (gameIsOn) {
     if (gCounter === 0) {
@@ -73,7 +75,7 @@ function openModal() {
 function restartGame() {
   const elModal = document.querySelector('.modal-box')
   elModal.classList.add('black')
-  enableBtns()
+  toggleButtons()
 
   gameIsOn = false
   gCounter = 2
@@ -122,22 +124,49 @@ function makeShuffleColors(colorsArr, size) {
   return newArray
 }
 
-function disableBtns() {
-  document.querySelector('.start').disabled = true
-  const buttons = document.querySelectorAll('.size')
-  for (const button of buttons) {
-    button.setAttribute('disabled', true)
-  }
-}
-function enableBtns() {
-  document.querySelector('.start').disabled = false
-  const buttons = document.querySelectorAll('.size')
-  for (const button of buttons) {
-    button.setAttribute('disabled', false)
+// function disableBtns() {
+//   let elH5 = document.querySelector('h5')
+//   elH5.style.display = 'none'
+//   document.querySelector('.start').disabled = true
+//   const buttons = document.querySelectorAll('.size')
+//   for (const button of buttons) {
+//     button.setAttribute('disabled', true)
+//   }
+// }
+// function enableBtns() {
+//   let elH5 = document.querySelector('h5')
+//   elH5.style.display = 'block'
+//   document.querySelector('.start').disabled = false
+//   const buttons = document.querySelectorAll('.size')
+//   for (const button of buttons) {
+//     button.setAttribute('disabled', false)
+//   }
+// }
+
+function toggleButtons() {
+  let elH5 = document.querySelector('h5')
+  if (gDisableBtns) {
+    console.log('false')
+    elH5.style.display = 'none'
+    document.querySelector('.start').disabled = false
+    const buttons = document.querySelectorAll('.size')
+    for (const button of buttons) {
+      button.setAttribute('disabled', true)
+    }
+    gDisableBtns = true
+  } else {
+    console.log('true')
+    elH5.style.display = 'block'
+    document.querySelector('.start').disabled = true
+    const buttons = document.querySelectorAll('.size')
+    for (const button of buttons) {
+      button.setAttribute('disabled', false)
+    }
+    gDisableBtns = false
   }
 }
 
-function showColors() {
+function flashCards() {
   document.querySelectorAll(`.item`).forEach(function (elDiv) {
     elDiv.classList.remove('hide')
   })
