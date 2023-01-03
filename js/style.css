@@ -117,6 +117,25 @@ a {
   border-radius: 100%;
 }
 
+.contact-btn {
+  color: white;
+  width: 200px;
+  background-color: #ee4b2b;
+}
+.contact-btn a {
+  color: white;
+}
+.my-about {
+  font-size: larger;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.container-form {
+  color: #ee4b2b;
+  font-size: larger;
+  font-family: 'Courier New', Courier, monospace;
+}
+
 /* helpers */
 .white {
   background-color: rgb(251, 248, 248);
@@ -151,4 +170,18 @@ a {
 
 .center {
   align-items: center;
+}
+
+.main-container .text-logo {
+  font-family: Caveat, cursive;
+  color: #ee4b2b;
+}
+
+.main-container p {
+  color: whitesmoke;
+  max-width: 980px;
+}
+
+.row {
+  flex-direction: row;
 }
