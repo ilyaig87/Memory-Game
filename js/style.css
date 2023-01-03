@@ -49,7 +49,10 @@ header {
 
 ul {
   list-style: none;
-  gap: 25px;
+}
+a {
+  text-decoration: none;
+  margin: 15px;
   font-family: Shadows;
   font-weight: 400;
   font-size: x-large;
