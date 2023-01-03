@@ -12,10 +12,10 @@ let gColorsArray = []
 let gDisableBtns = false
 
 function onInit() {
-  toggleButtons()
-  gDisableBtns = true
-  flashCards()
-  setTimeout(changeToWhite, 2000)
+  // toggleButtons()
+  // gDisableBtns = true
+  // flashCards()
+  // setTimeout(changeToWhite, 2000)
 }
 
 function changeToWhite() {
@@ -146,7 +146,6 @@ function makeShuffleColors(colorsArr, size) {
 function toggleButtons() {
   let elH5 = document.querySelector('h5')
   if (gDisableBtns) {
-    console.log('false')
     elH5.style.display = 'none'
     document.querySelector('.start').disabled = false
     const buttons = document.querySelectorAll('.size')
@@ -155,7 +154,6 @@ function toggleButtons() {
     }
     gDisableBtns = true
   } else {
-    console.log('true')
     elH5.style.display = 'block'
     document.querySelector('.start').disabled = true
     const buttons = document.querySelectorAll('.size')

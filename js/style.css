@@ -1,8 +1,25 @@
+@font-face {
+  font-family: Caveat;
+  src: url('/fonts/Caveat-VariableFont_wght.ttf');
+}
+@font-face {
+  font-family: Shadows;
+  src: url('/fonts/ShadowsIntoLight-Regular.ttf');
+}
+
 * {
   box-sizing: border-box;
 }
 
-h1 {
+body {
+  height: 100vh;
+  background-image: url('https://img.freepik.com/premium-vector/vector-jungle-illustration-game-background_303920-13.jpg?w=2000');
+}
+.header-container {
+  max-width: 100%;
+}
+
+.box-container h1 {
   font-size: 90px;
   font-weight: 600;
   font-family: 'Niconne', cursive;
@@ -14,11 +31,41 @@ h1 {
 
 h5 {
   color: aliceblue;
+  font-family: Caveat;
+  font-size: x-large;
 }
 
 img {
   display: absolute;
 }
+
+header {
+  min-height: 100px;
+}
+
+.header-nav {
+  width: 400px;
+}
+
+ul {
+  list-style: none;
+  gap: 25px;
+  font-family: Shadows;
+  font-weight: 400;
+  font-size: x-large;
+  color: #f77a62;
+}
+
+.header-container h1 {
+  width: 150px;
+  font-family: Caveat, cursive;
+  color: #ee4b2b;
+}
+/* .header-nav {
+  display: flex;
+  justify-content: space-between;
+} */
+
 .btn.start {
   height: 50px;
   width: 300px;
@@ -28,24 +75,13 @@ img {
 
 .btn.size {
   width: 97px;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: Caveat, 'Times New Roman', Times, serif;
   font-weight: 700;
   color: black;
 }
 
-body {
-  height: 100vh;
-  background-image: url('https://img.freepik.com/premium-vector/vector-jungle-illustration-game-background_303920-13.jpg?w=2000');
-}
 .main-layout {
   min-width: 980px;
-}
-.flex {
-  display: flex;
-}
-
-.center {
-  justify-content: center;
 }
 
 .main-container {
@@ -68,14 +104,28 @@ body {
   grid-template-rows: repeat(4, 50px);
   gap: 30px;
 }
+
+.levels {
+  padding: 10px;
+}
+
 .item {
   border: 2px dotted black;
   border-radius: 100%;
 }
 
+/* helpers */
 .white {
   background-color: rgb(251, 248, 248);
   border: 3px solid rgb(230, 16, 16);
+}
+
+.flex {
+  display: flex;
+}
+
+.center {
+  justify-content: center;
 }
 
 .hide {
@@ -88,10 +138,14 @@ body {
   );
 }
 
-.levels {
-  padding: 10px;
-}
-
 .display-none {
   display: none;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.center {
+  align-items: center;
 }
