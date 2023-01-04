@@ -2,8 +2,13 @@
   font-family: Caveat;
   src: url('/fonts/Caveat-VariableFont_wght.ttf');
 }
+
 @font-face {
   font-family: Shadows;
+  src: url('/fonts/ShadowsIntoLight-Regular.ttf');
+}
+@font-face {
+  font-family: PaytoneOne;
   src: url('/fonts/ShadowsIntoLight-Regular.ttf');
 }
 
@@ -11,8 +16,13 @@
   box-sizing: border-box;
 }
 
+a:hover {
+  color: #fbf6f4;
+}
+
 body {
   height: 100vh;
+  /* background-image: url('https://preview.redd.it/g1bsno0o28c81.jpg?width=1560&format=pjpg&auto=webp&s=dc67ec1c55135d1ee95876b9f3c18c0e6335f360'); */
   background-image: url('https://img.freepik.com/premium-vector/vector-jungle-illustration-game-background_303920-13.jpg?w=2000');
 }
 .header-container {
@@ -40,7 +50,7 @@ img {
 }
 
 header {
-  min-height: 100px;
+  min-height: 50px;
 }
 
 .header-nav {
@@ -160,6 +170,10 @@ a {
   );
 }
 
+.grid {
+  display: grid;
+}
+
 .display-none {
   display: none;
 }
@@ -184,4 +198,48 @@ a {
 
 .row {
   flex-direction: row;
+}
+
+.score-container {
+  font-family: Caveat, cursive;
+  color: #ffffff;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+
+.score-container h3 span {
+  color: #ffffff;
+  font-size: xx-large;
+}
+
+.img-game {
+  max-height: 200px;
+  max-width: 100%;
+}
+
+.games-container h1 {
+  padding: 20px;
+  font-family: Caveat, cursive;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.games {
+  font-family: Caveat, cursive;
+  color: #ffffff;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
+
+.game-box1,
+.game-box2 {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
 }

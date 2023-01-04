@@ -1,0 +1,52 @@
+* {
+  box-sizing: border-box;
+}
+
+.card {
+  min-width: 100%;
+  border: 2px solid rgb(239, 167, 167);
+  background-color: darkgrey;
+}
+
+.tic-tac-toe {
+  gap: 10px;
+  padding: 10px;
+  grid-template-columns: repeat(3, 200px);
+  grid-template-rows: repeat(3, 180px);
+  justify-content: center;
+  align-content: center;
+}
+
+.card.hide-x {
+  background-image: url('/img/x.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.card.hide-0 {
+  width: 100px;
+  background-image: url('/img/0.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.game-buttons {
+  flex-direction: column;
+  gap: 15px;
+}
+
+.player-btn {
+  width: 150px;
+}
+
+.modal-box h1 {
+  font-size: 90px;
+  font-weight: 600;
+  font-family: 'Niconne', cursive;
+  color: #fda270;
+  text-shadow: 2px 2px 0px #957dad, 4px 4px 0px #ee4b2b, 6px 6px 0px #00c2cb,
+    8px 8px 0px #ff7f50, 10px 10px 0px #553c9a;
+  padding: 25px;
+}
