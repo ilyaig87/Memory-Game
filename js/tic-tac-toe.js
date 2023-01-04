@@ -3,33 +3,41 @@
 let gBoard = []
 let gGameIsOn = false
 let gFirstMove = false
+let gCounter = 9
+createBoard()
 
 function playTwo(i, j) {
+  console.log(gGameIsOn)
   if (!gGameIsOn) return
+  gCounter--
+  if (gCounter === 0) {
+    openTieModal()
+    gGameIsOn = true
+  }
+
   let firstPlayer = 'First Player'
   let secondPlayer = 'Second Player'
   let board = gBoard
-
   let elCurrentCard = document.querySelector(`.card${i}-${j}`)
-
-  elCurrentCard.classList.toggle('hide-x')
   if (!gFirstMove) {
+    elCurrentCard.classList.add('hide-x')
     board[i][j] = secondPlayer
-
     if (checkVictory(board)) {
       gGameIsOn = false
       openModal(secondPlayer)
     }
     gFirstMove = true
   } else {
-    elCurrentCard.classList.toggle('hide-0')
+    elCurrentCard.classList.add('hide-0')
     board[i][j] = firstPlayer
     if (checkVictory(board)) {
       gGameIsOn = false
       openModal(firstPlayer)
     }
+
     gFirstMove = false
   }
+  console.table(board)
 }
 
 function checkVictory(board) {
@@ -50,30 +58,36 @@ function checkVictory(board) {
   return false
 }
 
-function playOne(num) {
+function playOne(i, j) {
   let elCurrentCard = document.querySelector(`.card${i}-${j}`)
   if (!gGameIsOn) return
 }
 
 function onePlayer() {
   let elButton = document.querySelector(`.one`)
-  elButton.innerHTML = 'Restart Game'
-  startGame('two')
+  elButton.disabled = true
+  startGame()
   renderGame('One')
 }
 function twoPlayers() {
   let elButton = document.querySelector(`.two`)
-  elButton.innerHTML = 'Restart Game'
-  startGame('one')
+  elButton.disabled = true
+  startGame()
   renderGame('Two')
-  elButton.innerHTML = 'Restart Game'
 }
 
 function disableBtns(str) {
-  document.querySelector(`.${str}`).disabled = true
+  let elButton1 = document.querySelector(`.one`)
+  let elButton2 = document.querySelector(`.two`)
+  elButton1.disabled = true
+  elButton2.disabled = true
 }
+
 function enableBtns() {
-  document.querySelector(`.player-btn`).disabled = false
+  let elButton1 = document.querySelector(`.one`)
+  let elButton2 = document.querySelector(`.two`)
+  elButton1.disabled = false
+  elButton2.disabled = false
 }
 
 function createBoard() {
@@ -101,11 +115,10 @@ function renderGame(str) {
   elContainer.innerHTML = strHTML
 }
 
-createBoard()
-function startGame(str) {
+function startGame() {
   gGameIsOn = true
   gFirstMove = true
-  disableBtns(str)
+  disableBtns()
 }
 
 function openModal(name) {
@@ -120,6 +133,9 @@ function openModal(name) {
 }
 
 function restartGame() {
+  gBoard = []
+  // let elButton1 = document.querySelector(`.one`)
+  // let elButton2 = document.querySelector(`.two`)
   closeModal()
 }
 
@@ -131,4 +147,15 @@ function closeModal() {
   elContainer.classList.remove('display-none')
   eldiv.classList.remove('display-none')
   enableBtns()
+}
+
+function openTieModal() {
+  const eldiv = document.querySelector('.box-container')
+  const elModal = document.querySelector('.modal-box')
+  const elName = document.querySelector('.modal-box h1')
+  const elContainer = document.querySelector('.game-container')
+  elModal.classList.remove('display-none')
+  elContainer.classList.add('display-none')
+  eldiv.classList.add('display-none')
+  elName.innerHTML = 'No winners- Tie'
 }
