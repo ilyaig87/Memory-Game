@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/img/favicon.png" />
     <link rel="stylesheet" href="js/lib/bootstrap.css" />
-    <link rel="stylesheet" href="js/style-tic-tac-toe.css" />
     <link rel="stylesheet" href="js/style.css" />
+    <link rel="stylesheet" href="js/style-tic-tac-toe.css" />
     <title>Tic Tac Toe</title>
   </head>
   <body class="main-layout">
@@ -27,6 +27,12 @@
     <main class="main-container">
       <div class="box-container">
         <h1 class="game-name">Tic Tac Toe!</h1>
+        <div class="modal-box display-none">
+          <h3><span></span> Won! 😎</h3>
+          <!-- <button class="re-player-btn btn btn-success" onclick="restartGame()">
+            Restart
+          </button> -->
+        </div>
         <div class="game-buttons flex center">
           <div class="player">
             <button
@@ -43,18 +49,19 @@
             </button>
           </div>
 
-          <!-- <button onclick="start()" class="start btn btn-primary">Play</button> -->
+          <button
+            id="restart-button"
+            class="btn btn-primary"
+            onclick="restartGame()"
+            style="visibility: hidden"
+          >
+            Restart Game
+          </button>
         </div>
       </div>
 
       <div class="game-container">
         <div class="tic-tac-toe grid"></div>
-      </div>
-      <div class="modal-box display-none">
-        <h1><span></span> Won! 😎</h1>
-        <button class="player-btn btn btn-success" onclick="restartGame()">
-          Restart
-        </button>
       </div>
     </main>
   </body>

@@ -34,19 +34,14 @@
 
 .game-buttons {
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
 }
 
-.player-btn {
-  width: 150px;
+.modal-box h3 {
+  padding: 10px;
+  color: antiquewhite;
 }
 
-.modal-box h1 {
-  font-size: 90px;
-  font-weight: 600;
-  font-family: 'Niconne', cursive;
-  color: #fda270;
-  text-shadow: 2px 2px 0px #957dad, 4px 4px 0px #ee4b2b, 6px 6px 0px #00c2cb,
-    8px 8px 0px #ff7f50, 10px 10px 0px #553c9a;
-  padding: 25px;
+.re-player-btn {
+  width: 200px;
 }
