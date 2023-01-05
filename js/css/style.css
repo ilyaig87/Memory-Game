@@ -16,12 +16,29 @@
   box-sizing: border-box;
 }
 
+.main-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0 0 0 / 60%);
+  cursor: pointer;
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition: opacity 0.6s;
+}
+
 a:hover {
   color: #fbf6f4;
 }
 
 body {
-  height: 100vh;
+  /* height: 100vh; */
+  margin: 0;
+  font-size: 0.875rem;
   background-image: url('https://img.freepik.com/premium-vector/vector-jungle-illustration-game-background_303920-13.jpg?w=2000');
 }
 .header-container {
@@ -92,8 +109,9 @@ a {
   color: black;
 }
 
-.main-layout {
-  min-width: 980px;
+.main-layout > *:not(.full) {
+  margin-inline-end: 20px;
+  margin-inline-start: 20px;
 }
 
 .main-container {
@@ -241,4 +259,74 @@ a {
   justify-content: center;
   align-content: center;
   text-align: center;
+}
+
+.toggle-menu {
+  display: none;
+}
+
+@media (max-width: 980px) {
+  .main-layout {
+    background-color: rgb(21, 151, 208);
+  }
+}
+
+/* @media (max-width: 750px) {
+  .main-layout {
+    min-width: 750px;
+    background-color: rgb(245, 74, 74);
+  }
+} */
+@media (max-width: 640px) {
+  .main-layout {
+    min-width: 640px;
+  }
+
+  .main-nav-list {
+    position: fixed;
+    flex-direction: column;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    background-color: rgb(255 255 255 / 90%);
+    border-inline-start: 1px solid var(--clr3);
+    /* box-shadow: -6px 0 17px rgb(0 0 0 / 26%); */
+    min-width: 200px;
+
+    transition: transform 0.6s, box-shadow 0.6s;
+
+    transform: translateX(100%);
+  }
+
+  body.menu-opened .main-nav-list {
+    box-shadow: -6px 0 17px rgb(0 0 0 / 26%);
+    transform: translateX(0);
+  }
+
+  body.menu-opened .main-screen {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .toggle-menu {
+    display: block;
+  }
+
+  .main-header .main-nav-list > li {
+    border-bottom: 1px solid #553c9a;
+  }
+
+  .main-header .main-nav-list a {
+    padding: 10px 20px;
+    display: block;
+
+    transition: background-color 0.2s;
+  }
+  .main-header .main-nav-list a:hover {
+    background-color: #553c9a;
+  }
+  /* .main-nav-list {
+    display: none;
+  } */
+  /* your styles here */
 }

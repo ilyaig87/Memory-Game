@@ -10,19 +10,21 @@
     <title>More Games</title>
   </head>
   <body class="main-layout">
+    <div class="main-screen full" onclick="toggleMenu()"></div>
+
     <header class="header-container flex space-between">
       <h1 class="text-logo flex center">I-Games</h1>
       <div class="flex center">
         <nav class="header-nav">
-          <ul class="flex">
-            <li><a href="about.html"> About</a></li>
-            <li><a href="">Our Games</a></li>
-            <li><a href="contact.html"> Contact Us</a></li>
+          <ul class="main-nav-list flex">
+            <li><a href="./about.html"> About</a></li>
+            <li><a href="./more.html"> More Games</a></li>
+            <li><a href="./contact.html"> Contact Us</a></li>
           </ul>
         </nav>
+        <button class="toggle-menu" onclick="toggleMenu()">☰</button>
       </div>
     </header>
-
     <section class="games-container">
       <h1>More of our Games</h1>
       <div class="games grid">
@@ -49,7 +51,11 @@
         </div>
       </div>
     </section>
+    <script>
+      function toggleMenu() {
+        document.body.classList.toggle('menu-opened')
+      }
+    </script>
+    <script src="../js/lib/bootstrap.bundel.js"></script>
   </body>
-
-  <script src="../js/lib/bootstrap.bundel.js"></script>
 </html>

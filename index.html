@@ -12,16 +12,19 @@
     <title>I-Games</title>
   </head>
   <body class="main-layout">
+    <div class="main-screen full" onclick="toggleMenu()"></div>
+
     <header class="header-container flex space-between">
       <h1 class="text-logo flex center">I-Games</h1>
       <div class="flex center">
         <nav class="header-nav">
-          <ul class="flex">
+          <ul class="main-nav-list flex">
             <li><a href="./assets/about.html"> About</a></li>
             <li><a href="./assets/more.html"> More Games</a></li>
             <li><a href="./assets/contact.html"> Contact Us</a></li>
           </ul>
         </nav>
+        <button class="toggle-menu" onclick="toggleMenu()">☰</button>
       </div>
     </header>
     <main class="main-container flex center row">
@@ -33,6 +36,12 @@
         </button>
       </div>
     </main>
+    <script src="./js/lib/bootstrap.bundel.js"></script>
+
+    <script>
+      function toggleMenu() {
+        document.body.classList.toggle('menu-opened')
+      }
+    </script>
   </body>
-  <script src="./js/lib/bootstrap.bundel.js"></script>
 </html>
