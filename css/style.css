@@ -108,10 +108,10 @@ a {
   color: black;
 }
 
-.main-layout > *:not(.full) {
+/* .main-layout > *:not(.full) {
   margin-inline-end: 20px;
   margin-inline-start: 20px;
-}
+} */
 
 .main-container {
   text-align: center;
@@ -266,21 +266,27 @@ a {
 
 @media (max-width: 980px) {
   .main-layout {
-    background-color: rgb(21, 151, 208);
   }
 }
 
-/* @media (max-width: 750px) {
+@media (max-width: 440px) {
   .main-layout {
-    min-width: 750px;
-    background-color: rgb(245, 74, 74);
+    min-width: 300px;
   }
-} */
-@media (max-width: 640px) {
-  .main-layout {
-    min-width: 640px;
+  .container {
+    gap: 0;
+    grid-template-columns: repeat(10, 40px);
+    grid-template-rows: repeat(10, 40px);
   }
 
+  .game-container {
+    padding: 20px;
+  }
+  .tic-tac-toe {
+    gap: 5px;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+  }
   .main-nav-list {
     position: fixed;
     flex-direction: column;
@@ -288,7 +294,7 @@ a {
     right: 0;
     height: 100vh;
     background-color: rgb(255 255 255 / 90%);
-    border-inline-start: 1px solid var(--clr3);
+    border-inline-start: 1px solid brown;
     /* box-shadow: -6px 0 17px rgb(0 0 0 / 26%); */
     min-width: 200px;
 
@@ -324,8 +330,4 @@ a {
   .main-header .main-nav-list a:hover {
     background-color: #553c9a;
   }
-  /* .main-nav-list {
-    display: none;
-  } */
-  /* your styles here */
 }

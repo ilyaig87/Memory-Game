@@ -11,8 +11,8 @@
 .tic-tac-toe {
   gap: 10px;
   padding: 10px;
-  grid-template-columns: repeat(3, 200px);
-  grid-template-rows: repeat(3, 180px);
+  grid-template-columns: repeat(3, 150px);
+  grid-template-rows: repeat(3, 150px);
   justify-content: center;
   align-content: center;
 }
