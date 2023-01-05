@@ -18,7 +18,7 @@
 }
 
 .card.hide-x {
-  background-image: url('/./img/X.png');
+  background-image: url('../img/X.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -26,7 +26,7 @@
 
 .card.hide-0 {
   width: 100px;
-  background-image: url('/./img/O.png');
+  background-image: url('../img/O.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
