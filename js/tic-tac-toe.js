@@ -7,7 +7,10 @@ let gCounter = 9
 let gInterval
 
 function playOne(i, j) {
+  console.log(gFirstMove)
+
   if (!gGameIsOn) return
+
   let player = 'X'
   let computer = 'O'
   let fullBoard = gBoard
@@ -19,18 +22,15 @@ function playOne(i, j) {
     openTieModal()
     gGameIsOn = false
   }
-
   if (gFirstMove) {
+    gFirstMove = false
     elCurrentCard.classList.add('hide-x')
     fullBoard[i][j] = player
-    gFirstMove = false
-
     if (checkVictory(fullBoard, player)) {
       openModal('Player')
-      gGameIsOn = true
+      gGameIsOn = false
     } else {
       computerMove(fullBoard, computer)
-      gFirstMove = true
       if (checkVictory(fullBoard, computer)) {
         openModal('Computer')
         gGameIsOn = false
@@ -64,7 +64,6 @@ function playTwo(i, j) {
   } else {
     elCurrentCard.classList.add('hide-0')
     board[i][j] = player2
-    gFirstMove = true
     if (checkVictory(board, player2)) {
       gGameIsOn = false
       openModal('Player two')
@@ -127,11 +126,7 @@ function twoPlayers() {
   renderGame('Two')
 }
 
-function disableBtns(str) {
-  // let elButton1 = document.querySelector(`.one`)
-  // let elButton2 = document.querySelector(`.two`)
-  // elButton1.disabled = true
-  // elButton2.disabled = true
+function disableBtns() {
   let elButton1 = document.querySelector(`.player`)
   elButton1.classList.add('display-none')
 }
@@ -226,6 +221,7 @@ function computerMove(board, symbol) {
     gCounter--
     board[currCell[0]][currCell[1]] = symbol
     setTimeout(() => {
+      gFirstMove = true
       elCurrentCard.classList.add('hide-0')
     }, 1000)
   }

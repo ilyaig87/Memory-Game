@@ -35,6 +35,7 @@ function renderCards(size) {
     strHTML += `   
     <div id=${i} class="item item${i} hide" onclick="flipCard(${i})"></div>
     `
+
     document.getElementById(
       `box`
     ).style.gridTemplateColumns = `repeat(${Math.sqrt(size)}, 75px)`

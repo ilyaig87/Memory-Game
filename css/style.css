@@ -132,7 +132,7 @@ a {
   align-content: center;
   grid-template-columns: repeat(4, 50px);
   grid-template-rows: repeat(4, 50px);
-  gap: 30px;
+  gap: 10px;
 }
 
 .levels {
@@ -270,24 +270,29 @@ a {
   }
 }
 
-@media (max-width: 440px) {
+@media (max-width: 400px) {
   .main-layout {
-    min-width: 300px;
+    min-width: 400px;
   }
+  .item {
+    width: 100%;
+  }
+
   .container {
-    gap: 0;
-    grid-template-columns: repeat(10, 40px);
-    grid-template-rows: repeat(10, 40px);
+    /* align-content: stretch; */
+    grid-template-columns: repeat(4, 42px) !important;
+    grid-template-rows: repeat(16, 42px) !important;
   }
 
   .game-container {
     padding: 20px;
   }
   .tic-tac-toe {
-    gap: 5px;
+    gap: 0.5em;
     grid-template-columns: repeat(3, 100px);
     grid-template-rows: repeat(3, 100px);
   }
+
   .main-nav-list {
     position: fixed;
     flex-direction: column;
