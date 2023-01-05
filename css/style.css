@@ -25,9 +25,7 @@
   background-color: rgb(0 0 0 / 60%);
   cursor: pointer;
   opacity: 0;
-
   pointer-events: none;
-
   transition: opacity 0.6s;
 }
 
@@ -48,8 +46,8 @@ body {
 .box-container h1 {
   font-size: 90px;
   font-weight: 600;
-  /* font-family: 'Niconne', cursive; */
-  color: #0a0909;
+  font-family: 'Niconne', cursive;
+  color: #ff0000fb;
   text-shadow: 2px 2px 0px #957dad, 4px 4px 0px #ee4b2b, 6px 6px 0px #00c2cb,
     8px 8px 0px #ff7f50, 10px 10px 0px #553c9a;
   padding: 25px;
@@ -76,6 +74,7 @@ header {
 ul {
   list-style: none;
 }
+
 a {
   text-decoration: none;
   margin: 15px;
