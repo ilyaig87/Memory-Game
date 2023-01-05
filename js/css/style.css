@@ -1,15 +1,15 @@
 @font-face {
   font-family: Caveat;
-  src: url('/fonts/Caveat-VariableFont_wght.ttf');
+  src: url('/./fonts/Caveat-VariableFont_wght.ttf');
 }
 
 @font-face {
   font-family: Shadows;
-  src: url('/fonts/ShadowsIntoLight-Regular.ttf');
+  src: url('/./fonts/ShadowsIntoLight-Regular.ttf');
 }
 @font-face {
   font-family: PaytoneOne;
-  src: url('/fonts/ShadowsIntoLight-Regular.ttf');
+  src: url('/./fonts/ShadowsIntoLight-Regular.ttf');
 }
 
 * {
