@@ -39,7 +39,7 @@ body {
   /* height: 100vh; */
   margin: 0;
   font-size: 0.875rem;
-  background-image: url('../../img/cover.jpg');
+  background-image: url('/img/cover.jpg');
 }
 .header-container {
   max-width: 100%;
