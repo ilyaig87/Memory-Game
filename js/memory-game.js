@@ -68,6 +68,7 @@ function flipCard(num) {
       if (firstColor.color === secondColor.color) {
         gGameObjArray[num - 1].isShown = true
         gScore--
+        console.log(gScore)
         if (gScore === 0) {
           openModal()
         }
@@ -76,7 +77,7 @@ function flipCard(num) {
         for (let i = 0; i < gDivArray.length; i++) {
           setTimeout(function () {
             gDivArray[i].classList.add('hide')
-          }, 500) // delay of 500 milliseconds (0.5 seconds)
+          }, 500)
         }
       }
       gCompareArray = []
@@ -87,12 +88,12 @@ function flipCard(num) {
 }
 
 function restartGame() {
-  closeModal()
-  enableBtns()
-  gameIsOn = false
-  gCounter = 2
-  gDivArray = []
   gScore = 0
+  gCompareArray = []
+  gCounter = 2
+  gameIsOn = true
+  enableBtns()
+  closeModal()
 }
 
 function closeModal() {
@@ -102,11 +103,6 @@ function closeModal() {
   elModal.classList.add('display-none')
   elContainer.classList.remove('display-none')
   eldiv.classList.remove('display-none')
-
-  const buttons = document.querySelectorAll('.size')
-  for (const button of buttons) {
-    button.setAttribute('disabled', false)
-  }
 }
 
 function openModal() {
@@ -137,7 +133,7 @@ function disableBtns() {
   document.querySelector('.start').disabled = true
   const buttons = document.querySelectorAll('.size')
   for (const button of buttons) {
-    button.setAttribute('disabled', true)
+    button.disabled = true
   }
 }
 function enableBtns() {
@@ -146,7 +142,7 @@ function enableBtns() {
   document.querySelector('.start').disabled = false
   const buttons = document.querySelectorAll('.size')
   for (const button of buttons) {
-    button.setAttribute('disabled', false)
+    button.disabled = false
   }
 }
 

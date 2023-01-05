@@ -57,6 +57,7 @@ h5 {
   color: aliceblue;
   font-family: Caveat;
   font-size: x-large;
+  color: #000000;
 }
 
 img {
@@ -218,14 +219,14 @@ a {
 
 .score-container {
   font-family: Caveat, cursive;
-  color: #ffffff;
+  color: #000000;
   display: grid;
   justify-content: center;
   align-content: center;
 }
 
 .score-container h3 span {
-  color: #ffffff;
+  color: #070707;
   font-size: xx-large;
 }
 
