@@ -39,7 +39,7 @@ body {
   /* height: 100vh; */
   margin: 0;
   font-size: 0.875rem;
-  background-image: url('https://img.freepik.com/premium-vector/vector-jungle-illustration-game-background_303920-13.jpg?w=2000');
+  background-image: url('../../img/cover.jpg');
 }
 .header-container {
   max-width: 100%;
@@ -49,7 +49,7 @@ body {
   font-size: 90px;
   font-weight: 600;
   /* font-family: 'Niconne', cursive; */
-  color: #fda270;
+  color: #0a0909;
   text-shadow: 2px 2px 0px #957dad, 4px 4px 0px #ee4b2b, 6px 6px 0px #00c2cb,
     8px 8px 0px #ff7f50, 10px 10px 0px #553c9a;
   padding: 25px;
@@ -82,13 +82,13 @@ a {
   font-family: Shadows;
   font-weight: 400;
   font-size: x-large;
-  color: #f77a62;
+  color: #000000;
 }
 
 .header-container h1 {
   width: 150px;
   font-family: Caveat, cursive;
-  color: #ee4b2b;
+  color: #000000;
 }
 /* .header-nav {
   display: flex;
@@ -205,7 +205,7 @@ a {
 
 .main-container .text-logo {
   font-family: Caveat, cursive;
-  color: #ee4b2b;
+  color: #fff7f5;
 }
 
 .main-container p {
