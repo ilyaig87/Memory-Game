@@ -40,8 +40,18 @@
 .modal-box h3 {
   padding: 10px;
   color: antiquewhite;
+  font-family: Caveat;
+  font-size: 1.5em;
+  color: wheat;
+  letter-spacing: 3px;
 }
 
 .re-player-btn {
   width: 200px;
+}
+
+.box-container h4 {
+  font-family: Caveat;
+  font-size: 1.5em;
+  color: wheat;
 }

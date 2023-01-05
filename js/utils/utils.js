@@ -289,3 +289,15 @@ function createCards(num) {
   }
   return cards
 }
+
+function getEmptyCell(board) {
+  const emptyCells = []
+  for (let row = 0; row < board.length; row++) {
+    for (let col = 0; col < board[row].length; col++) {
+      if (board[row][col] === null) {
+        emptyCells.push([row, col])
+      }
+    }
+  }
+  return emptyCells
+}

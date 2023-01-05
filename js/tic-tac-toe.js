@@ -4,71 +4,122 @@ let gBoard = []
 let gGameIsOn = false
 let gFirstMove = false
 let gCounter = 9
-createBoard()
+let gInterval
+
+function playOne(i, j) {
+  if (!gGameIsOn) return
+  let player = 'X'
+  let computer = 'O'
+  let fullBoard = gBoard
+  let elCurrentCard = document.querySelector(`.card${i}-${j}`)
+  if (fullBoard[i][j] === player || fullBoard[i][j] === computer) return
+  gCounter--
+
+  if (gCounter === 0) {
+    openTieModal()
+    gGameIsOn = false
+  }
+
+  if (gFirstMove) {
+    elCurrentCard.classList.add('hide-x')
+    fullBoard[i][j] = player
+    gFirstMove = false
+
+    if (checkVictory(fullBoard, player)) {
+      openModal('Player')
+      gGameIsOn = true
+    } else {
+      computerMove(fullBoard, computer)
+      gFirstMove = true
+      if (checkVictory(fullBoard, computer)) {
+        openModal('Computer')
+        gGameIsOn = false
+      }
+    }
+  }
+}
 
 function playTwo(i, j) {
   if (!gGameIsOn) return
-
-  let firstPlayer = 'First Player'
-  let secondPlayer = 'Second Player'
+  let player1 = 'X'
+  let player2 = 'O'
   let board = gBoard
   let elCurrentCard = document.querySelector(`.card${i}-${j}`)
-  if (board[i][j] === firstPlayer || board[i][j] === secondPlayer) return
+  if (board[i][j] !== null) return
+
   gCounter--
-  if (gCounter === 0) {
+
+  if (gCounter < 1) {
     openTieModal()
-    gGameIsOn = true
+    gGameIsOn = false
   }
-  if (!gFirstMove) {
+  if (gFirstMove) {
     elCurrentCard.classList.add('hide-x')
-    board[i][j] = secondPlayer
-    if (checkVictory(board)) {
+    board[i][j] = player1
+    gFirstMove = false
+    if (checkVictory(board, player1)) {
       gGameIsOn = false
-      openModal(secondPlayer)
+      openModal('Player one')
     }
-    gFirstMove = true
   } else {
     elCurrentCard.classList.add('hide-0')
-    board[i][j] = firstPlayer
-    if (checkVictory(board)) {
+    board[i][j] = player2
+    gFirstMove = true
+    if (checkVictory(board, player2)) {
       gGameIsOn = false
-      openModal(firstPlayer)
+      openModal('Player two')
     }
-
-    gFirstMove = false
   }
-  // console.table(board)
 }
 
-function checkVictory(board) {
-  for (var i = 0; i < 3; i++) {
-    if (board[i][0] === board[i][1] && board[i][1] === board[i][2]) {
-      return true
-    }
-    if (board[0][i] === board[1][i] && board[1][i] === board[2][i]) {
-      return true
-    }
-    if (board[0][0] === board[1][1] && board[1][1] === board[2][2]) {
-      return true
-    }
-    if (board[0][2] === board[1][1] && board[1][1] === board[2][0]) {
+function checkVictory(board, symbol) {
+  // Check rows
+  for (let row = 0; row < 3; row++) {
+    if (
+      board[row][0] === symbol &&
+      board[row][1] === symbol &&
+      board[row][2] === symbol
+    ) {
       return true
     }
   }
+  // Check columns
+  for (let col = 0; col < 3; col++) {
+    if (
+      board[0][col] === symbol &&
+      board[1][col] === symbol &&
+      board[2][col] === symbol
+    ) {
+      return true
+    }
+  }
+  // Check diagonals
+  if (
+    board[0][0] === symbol &&
+    board[1][1] === symbol &&
+    board[2][2] === symbol
+  ) {
+    return true
+  }
+  if (
+    board[0][2] === symbol &&
+    board[1][1] === symbol &&
+    board[2][0] === symbol
+  ) {
+    return true
+  }
+
   return false
-}
-
-function playOne(i, j) {
-  let elCurrentCard = document.querySelector(`.card${i}-${j}`)
-  if (!gGameIsOn) return
 }
 
 function onePlayer() {
   let elButton = document.querySelector(`.one`)
   elButton.disabled = true
+
   startGame()
   renderGame('One')
 }
+
 function twoPlayers() {
   let elButton = document.querySelector(`.two`)
   elButton.disabled = true
@@ -100,7 +151,7 @@ function createBoard() {
   for (let i = 0; i < 3; i++) {
     let row = []
     for (let j = 0; j < 3; j++) {
-      row.push({})
+      row.push(null)
     }
     board.push(row)
   }
@@ -120,7 +171,7 @@ function renderGame(str) {
 }
 
 function startGame() {
-  gCounter = 0
+  gCounter = 9
   gGameIsOn = true
   gFirstMove = true
   disableBtns()
@@ -130,10 +181,10 @@ function startGame() {
 function openModal(name) {
   // const eldiv = document.querySelector('.box-container')
   const elModal = document.querySelector('.modal-box')
-  const elName = document.querySelector('.modal-box span')
+  const elName = document.querySelector('h3 span')
   document.getElementById('restart-button').style.visibility = 'visible'
   // const elContainer = document.querySelector('.game-container')
-  elName.innerHTML = name
+  elName.innerHTML = name + ` won 😍`
   elModal.classList.remove('display-none')
   // elContainer.classList.add('display-none')
   // eldiv.classList.add('display-none')
@@ -157,11 +208,25 @@ function closeModal() {
 }
 
 function openTieModal() {
-  document.getElementById('restart-button').style.visibility = 'visible'
-  const eldiv = document.querySelector('.box-container')
   const elModal = document.querySelector('.modal-box')
-  const elName = document.querySelector('.modal-box h1')
+  const elName = document.querySelector('h3 span')
+  document.getElementById('restart-button').style.visibility = 'visible'
   elModal.classList.remove('display-none')
-  eldiv.classList.add('display-none')
-  elName.innerHTML = 'No winners- Tie'
+  elName.innerHTML = 'No winners - Tie 😵'
+}
+
+function computerMove(board, symbol) {
+  let emptyCells = getEmptyCell(board)
+  if (emptyCells.length) {
+    let currCell = emptyCells[getRandomIntInt(0, emptyCells.length)]
+    let elCurrentCard = document.querySelector(
+      `.card${currCell[0]}-${currCell[1]}`
+    )
+    if (gCounter === 0) return
+    gCounter--
+    board[currCell[0]][currCell[1]] = symbol
+    setTimeout(() => {
+      elCurrentCard.classList.add('hide-0')
+    }, 1000)
+  }
 }
