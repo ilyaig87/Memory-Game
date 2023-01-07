@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="../js/lib/bootstrap.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/mine-sweeper.css" />
+
+    <link rel="icon" href="../img/Favicon.png" />
+
+    <title>Mine Sweeper</title>
+  </head>
+  <body class="main-layout">
+    <div class="main-screen full" onclick="toggleMenu()"></div>
+
+    <header class="header-container flex space-between">
+      <h1 class="text-logo flex center">I-Games</h1>
+      <div class="flex center">
+        <nav class="header-nav">
+          <ul class="main-nav-list flex">
+            <li><a href="./about.html"> About</a></li>
+            <li><a href="./more.html"> More Games</a></li>
+            <li><a href="./contact.html"> Contact Us</a></li>
+          </ul>
+        </nav>
+        <button class="toggle-menu" onclick="toggleMenu()">☰</button>
+      </div>
+    </header>
+
+    <section class="">
+      <div class="main-container">
+        <div class="box-container">
+          <h1>Mine Sweeper!</h1>
+          <h5>Choose the level before!</h5>
+
+          <section class="levels">
+            <button class="btn btn-success size" onclick="gameSize(4)">
+              Easy
+            </button>
+            <button class="btn btn-warning size" onclick="gameSize(8)">
+              Normal
+            </button>
+            <button class="btn btn-danger size" onclick="gameSize(12)">
+              Expert
+            </button>
+          </section>
+          <button onclick="onInit()" class="start btn btn-primary">
+            Are You Ready?
+          </button>
+        </div>
+      </div>
+
+      <div class="score-container main-layout">
+        <!-- <h3>Number of tries:<span> 0</span></h3> -->
+      </div>
+
+      <div class="mines-count grid">
+        <h3 class="">Mines Left: <span>0</span></h3>
+      </div>
+      <div class="mine-container grid" id="box"></div>
+      <div class="modal-box display-none">
+        <h1>You Won! 😎</h1>
+        <button class="btn btn-success" onclick="restartGame()">Restart</button>
+      </div>
+    </section>
+
+    <script src="../js/lib/bootstrap.bundel.js"></script>
+    <script src="../js/mine-sweeper.js"></script>
+    <script src="../js/utils/utils.js"></script>
+  </body>
+</html>
