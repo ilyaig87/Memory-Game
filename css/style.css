@@ -209,8 +209,9 @@ a {
 }
 
 .main-container p {
-  color: whitesmoke;
+  /* color: whitesmoke; */
   max-width: 980px;
+  padding: 20px;
 }
 
 .row {
@@ -277,7 +278,9 @@ a {
   .item {
     width: 100%;
   }
-
+  .main-container {
+    padding: 50px;
+  }
   .container {
     /* align-content: stretch; */
     grid-template-columns: repeat(4, 42px) !important;
@@ -303,9 +306,7 @@ a {
     border-inline-start: 1px solid brown;
     /* box-shadow: -6px 0 17px rgb(0 0 0 / 26%); */
     min-width: 200px;
-
     transition: transform 0.6s, box-shadow 0.6s;
-
     transform: translateX(100%);
   }
 
