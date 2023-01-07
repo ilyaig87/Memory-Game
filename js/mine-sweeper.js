@@ -55,17 +55,18 @@ function gameSize(size) {
 
 function cellClicked(elCell, i, j) {
   let count = document.querySelector('.mines-count span')
-  count.innerHTML = gGame.markedCount
-
   let board = gBoard
+  let num = checkNeighbors(gBoard, i, j)
   board[i][j].isMarked = true
   elCell.classList.remove('hide')
-  let num = checkNeighbors(gBoard, i, j)
+  count.innerHTML = gGame.markedCount
+
   if (!board[i][j].isMine) {
     elCell.innerHTML = num
   } else {
     elCell.innerHTML = BOMB
     gGame.markedCount--
+    count.innerHTML = gGame.markedCount
   }
 }
 
