@@ -16,11 +16,17 @@
   box-sizing: border-box;
 }
 
+body {
+  margin: 0;
+  font-size: 0.875rem;
+  background-image: url('../img/cover.jpg');
+}
+
 .main-screen {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+
   height: 100%;
   background-color: rgb(0 0 0 / 60%);
   cursor: pointer;
@@ -33,12 +39,6 @@ a:hover {
   color: #fbf6f4;
 }
 
-body {
-  /* height: 100vh; */
-  margin: 0;
-  font-size: 0.875rem;
-  background-image: url('../img/cover.jpg');
-}
 .header-container {
   max-width: 100%;
 }
@@ -109,10 +109,10 @@ a {
   color: black;
 }
 
-/* .main-layout > *:not(.full) {
+.main-layout > *:not(.full) {
   margin-inline-end: 20px;
   margin-inline-start: 20px;
-} */
+}
 
 .main-container {
   text-align: center;
