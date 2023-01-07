@@ -7,8 +7,6 @@ let gLevel = { SIZE: 4, MINES: 2 }
 const BOMB = '💣'
 let gBoard = []
 
-function onInit() {}
-
 function setLevel(size) {
   let level = size
   if (level === 4) {
@@ -40,7 +38,7 @@ function gameSize(size) {
       let currCell = gameBoard[i][j]
       let bombClass = currCell.isMine ? 'bomb' : ''
 
-      strHtmls += `<div id="item-${i}-${j}" class="cell cell-${i}-${j} ${bombClass} hide" onclick="cellClicked(this,${i},${j})"></div>`
+      strHtmls += `<div id="item-${i}-${j}" class="cell cell-${i}-${j} ${bombClass} hide " onclick="cellClicked(this,${i},${j})"></div>`
       document.getElementById(
         `box`
       ).style.gridTemplateColumns = `repeat(${size}, 50px)`
@@ -49,24 +47,35 @@ function gameSize(size) {
       ).style.gridTemplateRows = `repeat(${size}, 50px)`
     }
   }
-
   mineContainer.innerHTML = strHtmls
 }
 
 function cellClicked(elCell, i, j) {
+  if (!gGame.isOn) return
+  checkLose(i, j)
   let count = document.querySelector('.mines-count span')
-  let board = gBoard
-  let num = checkNeighbors(gBoard, i, j)
-  board[i][j].isMarked = true
+  let gameBoard = gBoard
+  let clickedCell = gameBoard[i][j]
+
+  // if (cellCount === 0) {
+  //   gGame.isOn
+  // }
+  if (clickedCell.isShown) return
+  let num = (clickedCell.minesAroundCount = checkNeighbors(gBoard, i, j))
+  clickedCell.isMarked = true
   elCell.classList.remove('hide')
+  clickedCell.isShown = true
   count.innerHTML = gGame.markedCount
 
-  if (!board[i][j].isMine) {
+  if (!clickedCell.isMine) {
     elCell.innerHTML = num
   } else {
     elCell.innerHTML = BOMB
     gGame.markedCount--
     count.innerHTML = gGame.markedCount
+  }
+  if (clickedCell.minesAroundCount === 0) {
+    expandShown(gBoard, elCell, i, j)
   }
 }
 
@@ -84,11 +93,16 @@ function createBoard(size) {
     }
     board.push(row)
   }
+
   for (let i = 0; i < gLevel.MINES; i++) {
-    let num1 = getRandomIntInt(0, size)
-    let num2 = getRandomIntInt(0, size)
-    board[num1][num2].isMine = true
+    let row, col
+    do {
+      row = Math.floor(Math.random() * size)
+      col = Math.floor(Math.random() * size)
+    } while (board[row][col].isMine === true)
+    board[row][col].isMine = true
   }
+
   return board
 }
 
@@ -107,6 +121,21 @@ function checkNeighbors(board, row, col) {
       }
     }
   }
-
   return count
+}
+
+function expandShown(board, elCell, i, j) {}
+
+function checkLose(i, j) {
+  let elModal = document.querySelector('.modal-box')
+  if (gBoard[i][j].isMine) {
+    elModal.classList.add('display-none')
+    gGame.isOn = false
+  }
+}
+
+function restartGame() {
+  let elModal = document.querySelector('.modal-box')
+  elModal.classList.remove('display-none')
+  gGame.isOn = true
 }
