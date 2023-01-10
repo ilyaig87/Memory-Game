@@ -68,6 +68,7 @@ function playTwo(i, j) {
       gGameIsOn = false
       openModal('Player two')
     }
+    gFirstMove = true
   }
 }
 
