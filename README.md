@@ -1,6 +1,3 @@
-
-
-I-GAMES
 I-GAMES is a collection of interactive games built using HTML, CSS, and JavaScript. The games are designed to be fun and engaging for players of all ages.
 
 Games Included
