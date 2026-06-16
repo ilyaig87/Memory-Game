@@ -198,7 +198,7 @@
 .bg-point.up .pt-label { bottom: 2px; }
 
 /* ---------- Dice ---------- */
-#dice { gap: 10px; align-items: center; }
+#dice { gap: 10px; align-items: center; justify-content: center; }
 .die {
   width: 46px;
   height: 46px;
