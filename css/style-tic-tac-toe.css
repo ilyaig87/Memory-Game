@@ -55,3 +55,310 @@
   font-size: 1.5em;
   color: rgb(4, 4, 4);
 }
+
+/* ============================================================
+   PREMIUM THEME OVERRIDES — scoped to body.game-page
+   Uses the shared design system from games.css
+   (presentation only — no JS hooks changed)
+   ============================================================ */
+
+/* ---------- Page layout / centering ---------- */
+body.game-page .main-container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  padding: 40px 18px 70px;
+  margin: 0 auto !important;
+  max-width: 760px;
+}
+
+body.game-page .box-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 460px;
+  padding: 26px 26px 30px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+  text-align: center;
+}
+
+/* ---------- Heading + subtitle ---------- */
+body.game-page .game-name {
+  margin: 0;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: clamp(2.2rem, 6vw, 3rem);
+  font-weight: 900;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, var(--gold), var(--magenta), var(--cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+
+body.game-page .box-container h4 {
+  margin: 0;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  color: var(--ink-soft);
+}
+
+/* ---------- Mode + restart buttons ---------- */
+body.game-page .game-buttons {
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  align-items: center;
+}
+
+body.game-page .player {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+body.game-page .player-btn {
+  flex: 1;
+  min-width: 150px;
+  padding: 13px 20px;
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--ink);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  box-shadow: none;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease,
+    filter 0.2s ease;
+}
+
+body.game-page .player-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+body.game-page .player-btn:active {
+  transform: translateY(0);
+}
+
+body.game-page .player-btn.one {
+  border: none;
+  color: #08222b;
+  background: linear-gradient(135deg, var(--cyan), var(--green));
+  box-shadow: 0 8px 22px rgba(56, 225, 255, 0.3);
+}
+body.game-page .player-btn.one:hover {
+  box-shadow: 0 12px 28px rgba(56, 225, 255, 0.45);
+}
+
+body.game-page .player-btn.two {
+  border: none;
+  color: #2a0a1a;
+  background: linear-gradient(135deg, var(--magenta), var(--gold));
+  box-shadow: 0 8px 22px rgba(255, 95, 162, 0.3);
+}
+body.game-page .player-btn.two:hover {
+  box-shadow: 0 12px 28px rgba(255, 95, 162, 0.45);
+}
+
+body.game-page #restart-button {
+  min-width: 200px;
+  padding: 12px 24px;
+  border: 1px solid var(--panel-border);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--ink);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.6px;
+  cursor: pointer;
+  box-shadow: none;
+  transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+body.game-page #restart-button:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
+}
+
+/* ---------- Winner / status modal as celebration banner ---------- */
+body.game-page .modal-box {
+  width: 100%;
+  max-width: 460px;
+  padding: 18px 22px;
+  border-radius: 16px;
+  text-align: center;
+  background: linear-gradient(
+    135deg,
+    rgba(56, 225, 255, 0.18),
+    rgba(255, 95, 162, 0.18)
+  );
+  border: 1px solid var(--panel-border);
+  box-shadow: var(--shadow), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  animation: ttt-banner-pop 0.45s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+@keyframes ttt-banner-pop {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+body.game-page .modal-box h3 {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+body.game-page .modal-box h3 span {
+  background: linear-gradient(90deg, var(--gold), var(--magenta));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ---------- Board frame ---------- */
+body.game-page .game-container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+}
+
+body.game-page .tic-tac-toe {
+  gap: 12px;
+  padding: 16px;
+  border-radius: var(--radius);
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.02)
+  );
+  border: 1px solid var(--panel-border);
+  box-shadow: var(--shadow), inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(6px);
+}
+
+/* ---------- Glass / neon tiles ---------- */
+body.game-page .card {
+  position: relative;
+  min-width: auto;
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  background-color: rgba(0, 0, 0, 0.28);
+  background-image: none;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 0 18px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+body.game-page .card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(56, 225, 255, 0.55);
+  background-color: rgba(56, 225, 255, 0.08);
+  box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.3),
+    0 8px 22px rgba(56, 225, 255, 0.18);
+}
+
+/* ---------- Marks: crisp CSS glyphs (X cyan / O magenta-gold) ---------- */
+body.game-page .card.hide-x,
+body.game-page .card.hide-0 {
+  background-image: none;
+  cursor: default;
+}
+
+body.game-page .card.hide-x::after,
+body.game-page .card.hide-0::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: 5.5rem;
+  font-weight: 800;
+  line-height: 1;
+  animation: ttt-mark-pop 0.32s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+body.game-page .card.hide-x::after {
+  content: '\2715'; /* ✕ */
+  color: var(--cyan);
+  text-shadow: 0 0 18px rgba(56, 225, 255, 0.75),
+    0 0 36px rgba(56, 225, 255, 0.45);
+}
+
+body.game-page .card.hide-0::after {
+  content: '\25EF'; /* ◯ */
+  color: var(--magenta);
+  font-size: 4.6rem;
+  text-shadow: 0 0 18px rgba(255, 95, 162, 0.75),
+    0 0 36px rgba(255, 209, 102, 0.4);
+}
+
+body.game-page .card.hide-x:hover,
+body.game-page .card.hide-0:hover {
+  transform: none;
+  background-color: rgba(0, 0, 0, 0.28);
+  border-color: var(--panel-border);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 0 18px rgba(0, 0, 0, 0.35);
+}
+
+@keyframes ttt-mark-pop {
+  0% {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ---------- Responsive board ---------- */
+@media (max-width: 600px) {
+  body.game-page .tic-tac-toe {
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 10px;
+  }
+  body.game-page .card.hide-x::after {
+    font-size: 3.6rem;
+  }
+  body.game-page .card.hide-0::after {
+    font-size: 3rem;
+  }
+}
