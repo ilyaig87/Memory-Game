@@ -1,0 +1,140 @@
+/* ============================================================
+   Checkers — board, squares, discs & kings.
+   Page chrome / panel / overlay come from games.css.
+   ============================================================ */
+
+:root {
+  --sq: 60px;
+  --sq-light: #e9dcc3;       /* warm cream */
+  --sq-light-2: #f3e9d4;
+  --sq-dark: #1e6a63;        /* deep teal/walnut */
+  --sq-dark-2: #155049;
+  --disc-red: #ff5a6e;
+  --disc-red-2: #b3243a;
+  --disc-black: #2b2f44;
+  --disc-black-2: #0c0e1a;
+  --crown-gold: #ffd166;
+}
+
+.checkers-board {
+  grid-template-columns: repeat(8, var(--sq));
+  grid-template-rows: repeat(8, var(--sq));
+  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.25);
+}
+
+/* ---------- Squares ---------- */
+.sq {
+  position: relative;            /* anchors .cell-dot move hints */
+  width: var(--sq);
+  height: var(--sq);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+.sq--light {
+  background: linear-gradient(135deg, var(--sq-light-2), var(--sq-light));
+}
+.sq--dark {
+  background: linear-gradient(135deg, var(--sq-dark), var(--sq-dark-2));
+  cursor: pointer;
+}
+
+/* gold ring on the selected square */
+.sq.selected::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 3px var(--crown-gold), 0 0 16px rgba(255, 209, 102, 0.6);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* subtle highlight for the last move's squares */
+.sq.lastmove::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 209, 102, 0.18);
+  pointer-events: none;
+}
+
+/* ---------- Discs ---------- */
+.disc {
+  position: relative;
+  width: 76%;
+  height: 76%;
+  border-radius: 50%;
+  z-index: 2;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.45), inset 0 -4px 8px rgba(0, 0, 0, 0.35);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.disc::before {
+  /* glossy highlight */
+  content: '';
+  position: absolute;
+  top: 12%;
+  left: 16%;
+  width: 50%;
+  height: 40%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0));
+  pointer-events: none;
+}
+.disc::after {
+  /* inner ring detail */
+  content: '';
+  position: absolute;
+  inset: 18%;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.18);
+  pointer-events: none;
+}
+
+.disc--red {
+  background: radial-gradient(circle at 35% 28%, var(--disc-red), var(--disc-red-2) 78%);
+}
+.disc--black {
+  background: radial-gradient(circle at 35% 28%, #4a5070, var(--disc-black) 55%, var(--disc-black-2) 92%);
+}
+
+/* clickable own pieces lift slightly on hover */
+.sq.own .disc:hover { transform: scale(1.06); cursor: pointer; }
+
+/* ---------- Kings ---------- */
+.disc.king {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.45), inset 0 -4px 8px rgba(0, 0, 0, 0.35),
+    0 0 0 3px var(--crown-gold), 0 0 16px rgba(255, 209, 102, 0.55);
+}
+.disc.king .crown {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(var(--sq) * 0.42);
+  color: var(--crown-gold);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+  z-index: 3;
+}
+.disc.just-crowned { animation: crownBounce 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.4); }
+@keyframes crownBounce {
+  0%   { transform: scale(0.7); }
+  55%  { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+
+/* ---------- Move hints (uses shared .cell-dot) ---------- */
+.cell-dot { z-index: 1; }
+.sq.capture-hint .cell-dot {
+  background: rgba(255, 90, 110, 0.6);
+  box-shadow: 0 0 14px rgba(255, 90, 110, 0.85);
+  width: 34%;
+  height: 34%;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 560px) {
+  :root { --sq: 40px; }
+}

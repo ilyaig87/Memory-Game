@@ -1,0 +1,153 @@
+/* ============================================================
+   I-GAMES — Games gallery (more.html)
+   Builds on the shared theme in games.css (body.game-page).
+   ============================================================ */
+
+/* Hero */
+.gallery-hero {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 48px 20px 8px;
+}
+.gallery-hero .kicker {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--panel-border);
+  backdrop-filter: blur(10px);
+}
+.gallery-hero h1 {
+  margin: 0;
+  font-size: clamp(2.6rem, 8vw, 5rem);
+  font-weight: 900;
+  letter-spacing: 1px;
+  line-height: 1.05;
+  background: linear-gradient(90deg, var(--gold), var(--magenta), var(--cyan));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 6s linear infinite;
+}
+@keyframes shine { to { background-position: 200% center; } }
+.gallery-hero p {
+  margin: 14px auto 0;
+  max-width: 560px;
+  color: var(--ink-soft);
+  font-size: 1.1rem;
+}
+
+/* Grid */
+.gallery-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 36px 20px 70px;
+}
+
+/* Card */
+.game-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 30px 24px 26px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+  overflow: hidden;
+  transition: transform 0.28s cubic-bezier(0.18, 0.89, 0.32, 1.1),
+    box-shadow 0.28s ease, border-color 0.28s ease;
+}
+/* animated accent glow that sweeps on hover */
+.game-card::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--cyan), var(--magenta), var(--gold));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.game-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.55);
+  border-color: transparent;
+  color: var(--ink);
+}
+.game-card:hover::before { opacity: 1; }
+
+.game-card .icon {
+  font-size: 76px;
+  line-height: 1;
+  margin-bottom: 14px;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.45));
+  transition: transform 0.3s ease;
+}
+.game-card:hover .icon { transform: scale(1.16) rotate(-6deg); }
+
+.game-card h2 {
+  margin: 0 0 6px;
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+.game-card p {
+  margin: 0 0 18px;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  min-height: 38px;
+}
+
+.play-cta {
+  margin-top: auto;
+  padding: 9px 22px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  color: #1a1730;
+  background: linear-gradient(135deg, var(--cyan), var(--green));
+  box-shadow: 0 8px 20px rgba(56, 225, 255, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.game-card:hover .play-cta {
+  transform: scale(1.06);
+  box-shadow: 0 12px 26px rgba(56, 225, 255, 0.5);
+}
+
+/* "Smart AI" ribbon for the AI games */
+.ai-badge {
+  position: absolute;
+  top: 16px;
+  right: -34px;
+  transform: rotate(45deg);
+  background: linear-gradient(135deg, var(--gold), var(--gold-deep));
+  color: #1a1730;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  padding: 5px 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}

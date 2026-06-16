@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Backgammon — I-Games</title>
+    <link rel="icon" href="../img/favicon.png" />
+    <link rel="stylesheet" href="../js/lib/bootstrap.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/games.css" />
+    <link rel="stylesheet" href="../css/backgammon.css" />
+  </head>
+  <body class="main-layout game-page">
+    <div class="main-screen full" onclick="toggleMenu()"></div>
+
+    <header class="header-container flex space-between">
+      <h1 class="text-logo flex center">I-Games</h1>
+      <div class="flex center">
+        <nav class="header-nav">
+          <ul class="main-nav-list flex">
+            <li><a href="./about.html"> About</a></li>
+            <li><a href="./more.html"> More Games</a></li>
+            <li><a href="./contact.html"> Contact Us</a></li>
+          </ul>
+        </nav>
+        <button class="toggle-menu" onclick="toggleMenu()">☰</button>
+      </div>
+    </header>
+
+    <main class="game-shell">
+      <section class="board-stage">
+        <div class="board-frame">
+          <div class="bg-board" id="board"></div>
+        </div>
+      </section>
+      <aside class="game-panel glass">
+        <h1 class="game-title">⚀ Backgammon</h1>
+        <p class="game-subtitle">Roll, race, and bear off.</p>
+        <div class="status-banner" id="status">Roll to begin</div>
+        <div class="panel-section"><h3>Dice</h3><div class="chips" id="dice"></div></div>
+        <div class="control-group"><span class="control-label">Difficulty</span>
+          <div class="seg" id="diffSeg">
+            <button class="seg-btn" data-level="easy">Easy</button>
+            <button class="seg-btn active" data-level="normal">Normal</button>
+            <button class="seg-btn" data-level="hard">Hard</button>
+          </div></div>
+        <div class="panel-actions">
+          <button class="game-btn game-btn--primary" id="rollBtn">Roll Dice</button>
+          <button class="game-btn" id="newGameBtn">New Game</button>
+        </div>
+        <div class="panel-section"><h3>Bar / Off</h3><div class="chips" id="barOff"></div></div>
+      </aside>
+    </main>
+
+    <div class="win-overlay hidden" id="winOverlay"><div class="win-card glass">
+      <div class="win-emoji" id="winEmoji">🏆</div>
+      <h2 class="win-title" id="winTitle"></h2>
+      <p class="win-subtitle" id="winSubtitle"></p>
+      <button class="game-btn game-btn--primary" id="winBtn">Play Again</button>
+    </div></div>
+
+    <script src="../js/utils/game-ui.js"></script>
+    <script src="../js/backgammon.js"></script>
+  </body>
+</html>

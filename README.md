@@ -3,6 +3,10 @@ I-GAMES is a collection of interactive games built using HTML, CSS, and JavaScri
 Games Included
 Memory Match: A classic memory game where players have to match pairs of cards.
 Tic-Tac-Toe: A classic game of tic-tac-toe where players have to get three in a row to win.
+Mine Sweeper: The timeless classic — clear the board without hitting a mine.
+Chess: Play against a real engine (minimax + alpha-beta with piece-square tables) or a friend. Full rules: castling, en passant, promotion, check/checkmate/stalemate.
+Checkers (Draughts): Mandatory captures, multi-jumps and kings, against a minimax AI or a friend.
+Backgammon: Full rules including the bar, hitting blots and bearing off, against a heuristic AI that evaluates pip count, blots and made points.
 Features
 Responsive design: The games are optimized for different screen sizes and resolutions, so they can be played on any device.
 High scores: The games include a high score system that saves the best scores for each game.

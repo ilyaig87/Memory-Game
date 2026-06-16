@@ -1,0 +1,87 @@
+/* ============================================================
+   Chess — board & piece styling.
+   Reuses the shared I-Games design system (css/games.css).
+   Only chess-specific rules live here.
+   ============================================================ */
+
+:root {
+  --sq: 64px;
+  --sq-light: #eef0f5;
+  --sq-dark: #6b78b5;
+}
+
+.chess-board {
+  grid-template-columns: repeat(8, var(--sq));
+  grid-template-rows: repeat(8, var(--sq));
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.25);
+}
+
+/* ---------- Squares ---------- */
+.sq {
+  position: relative;
+  width: var(--sq);
+  height: var(--sq);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(var(--sq) * 0.8);
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: background 0.18s ease, box-shadow 0.18s ease;
+}
+
+.sq--light { background: var(--sq-light); }
+.sq--dark  { background: var(--sq-dark); }
+
+/* White glyphs get a dark outline, black glyphs a light one,
+   so both read clearly on light AND dark squares. */
+.sq.piece-w { color: #ffffff; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55), 0 0 3px rgba(0, 0, 0, 0.45); }
+.sq.piece-b { color: #1b1f33; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.35); }
+
+/* Only squares that hold a piece the current player can grab show a pointer
+   hover; empty/illegal squares stay neutral. */
+.sq.movable:hover { box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.45); }
+
+.sq.selected {
+  box-shadow: inset 0 0 0 4px var(--gold), 0 0 16px rgba(255, 209, 102, 0.55);
+}
+
+.sq.last-move {
+  background-image: linear-gradient(rgba(255, 209, 102, 0.30), rgba(255, 209, 102, 0.30));
+}
+
+.sq.in-check {
+  box-shadow: inset 0 0 0 4px var(--red), 0 0 18px rgba(255, 90, 110, 0.7);
+}
+
+/* legal-move dots (.cell-dot from games.css) centred in the square */
+.sq .cell-dot {
+  top: 37%;
+  left: 37%;
+}
+/* a ring instead of a dot when the target square holds a capturable piece */
+.sq .cell-dot.capture {
+  width: 84%;
+  height: 84%;
+  top: 8%;
+  left: 8%;
+  background: transparent;
+  border: 4px solid rgba(56, 224, 138, 0.6);
+  box-shadow: 0 0 12px rgba(56, 224, 138, 0.5);
+}
+
+/* "pop" when a piece lands on a square */
+.sq.just-moved { animation: piecePop 0.22s ease; }
+@keyframes piecePop {
+  0%   { transform: scale(0.7); }
+  60%  { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 560px) {
+  :root { --sq: 40px; }
+}
