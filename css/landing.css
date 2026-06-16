@@ -83,6 +83,18 @@ body.landing .main-nav-list a.active {
   border-bottom: 1px solid var(--panel-border);
   background: rgba(15, 12, 41, 0.6);
 }
+.game-modal__home {
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--panel-border);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--ink);
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+.game-modal__home:hover { background: rgba(255, 255, 255, 0.16); transform: translateX(-2px); }
+body.landing .text-logo { cursor: pointer; }
 .game-modal__title {
   font-size: 1.25rem;
   font-weight: 800;

@@ -5,6 +5,7 @@ document.addEventListener('contextmenu', (event) => event.preventDefault())
 let gGame = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0 }
 let gLevel = { SIZE: 4, MINES: 2 }
 const BOMB = '💣'
+const FLAG = '🚩'
 let gBoard = []
 
 function setLevel(size) {
@@ -27,6 +28,7 @@ function gameSize(size) {
     isOn: true,
     shownCount: size,
     markedCount: gLevel.MINES,
+    flagsCount: 0,
     secsPassed: 0,
   }
   let gameBoard = createBoard(size)
@@ -38,7 +40,7 @@ function gameSize(size) {
       let currCell = gameBoard[i][j]
       let bombClass = currCell.isMine ? 'bomb' : ''
 
-      strHtmls += `<div id="item-${i}-${j}" class="cell cell-${i}-${j} ${bombClass} hide " onclick="cellClicked(this,${i},${j})"></div>`
+      strHtmls += `<div id="item-${i}-${j}" class="cell cell-${i}-${j} ${bombClass} hide " onclick="cellClicked(this,${i},${j})" oncontextmenu="toggleFlag(event,this,${i},${j})"></div>`
       document.getElementById(
         `box`
       ).style.gridTemplateColumns = `repeat(${size}, 50px)`
@@ -48,31 +50,49 @@ function gameSize(size) {
     }
   }
   mineContainer.innerHTML = strHtmls
+  updateMinesLeft()
+}
+
+// Right-click toggles a flag on a hidden cell. Flags can't be opened by a
+// left click, and the "Mines Left" counter tracks mines minus flags.
+function toggleFlag(ev, elCell, i, j) {
+  ev.preventDefault()
+  if (!gGame.isOn) return
+  const cell = gBoard[i][j]
+  if (cell.isShown) return
+  cell.isFlagged = !cell.isFlagged
+  if (cell.isFlagged) {
+    elCell.classList.add('flag')
+    elCell.innerHTML = FLAG
+    gGame.flagsCount++
+  } else {
+    elCell.classList.remove('flag')
+    elCell.innerHTML = ''
+    gGame.flagsCount--
+  }
+  updateMinesLeft()
+}
+
+function updateMinesLeft() {
+  const count = document.querySelector('.mines-count span')
+  if (count) count.innerHTML = gLevel.MINES - gGame.flagsCount
 }
 
 function cellClicked(elCell, i, j) {
   if (!gGame.isOn) return
-  checkLose(i, j)
-  let count = document.querySelector('.mines-count span')
   let gameBoard = gBoard
   let clickedCell = gameBoard[i][j]
 
-  // if (cellCount === 0) {
-  //   gGame.isOn
-  // }
-  if (clickedCell.isShown) return
+  if (clickedCell.isShown || clickedCell.isFlagged) return
+  checkLose(i, j)
   let num = (clickedCell.minesAroundCount = checkNeighbors(gBoard, i, j))
-  clickedCell.isMarked = true
   elCell.classList.remove('hide')
   clickedCell.isShown = true
-  count.innerHTML = gGame.markedCount
 
   if (!clickedCell.isMine) {
     elCell.innerHTML = num
   } else {
     elCell.innerHTML = BOMB
-    gGame.markedCount--
-    count.innerHTML = gGame.markedCount
   }
   if (clickedCell.minesAroundCount === 0) {
     expandShown(gBoard, elCell, i, j)
