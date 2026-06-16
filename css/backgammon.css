@@ -1,0 +1,259 @@
+/* ============================================================
+   Backgammon — board, points, checkers, dice, bar.
+   Built to sit on top of the shared I-Games glass theme
+   (see css/games.css). Only backgammon-specific styling here.
+   ============================================================ */
+
+:root {
+  --bg-felt:      #15321f;      /* dark green felt playing surface */
+  --bg-felt-2:    #0f2417;
+  --bg-wood:      #5a3a22;      /* warm wood frame */
+  --bg-wood-2:    #3c2614;
+  --pt-light:     #d9b27c;      /* light triangle (warm sand) */
+  --pt-dark:      #8a4a2b;      /* dark triangle (terracotta) */
+  --checker-w-1:  #f6f2e7;
+  --checker-w-2:  #c9c0a8;
+  --checker-b-1:  #43474f;
+  --checker-b-2:  #15171c;
+  --glow:         #38e1ff;
+  --glow-move:    #38e08a;
+}
+
+/* ---------- Board frame ---------- */
+.bg-board {
+  --board-w: 620px;
+  width: var(--board-w);
+  max-width: 88vw;
+  aspect-ratio: 1.32 / 1;
+  display: grid;
+  /* left half | bar | right half */
+  grid-template-columns: 1fr 42px 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0;
+  border-radius: 10px;
+  padding: 14px;
+  background:
+    linear-gradient(145deg, var(--bg-wood), var(--bg-wood-2));
+  box-shadow: inset 0 0 0 3px rgba(0,0,0,0.35), inset 0 0 40px rgba(0,0,0,0.5);
+  position: relative;
+  user-select: none;
+}
+
+/* The four checker fields (top-left, top-right, bottom-left, bottom-right) */
+.bg-quad {
+  display: flex;
+  background: linear-gradient(180deg, var(--bg-felt), var(--bg-felt-2));
+}
+.bg-quad.tl { grid-column: 1; grid-row: 1; }
+.bg-quad.tr { grid-column: 3; grid-row: 1; }
+.bg-quad.bl { grid-column: 1; grid-row: 2; }
+.bg-quad.br { grid-column: 3; grid-row: 2; }
+
+/* ---------- Central bar ---------- */
+.bg-bar {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  background: linear-gradient(145deg, var(--bg-wood), var(--bg-wood-2));
+  box-shadow: inset 0 0 0 2px rgba(0,0,0,0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 4px;
+}
+.bar-zone {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 4px 0;
+}
+.bar-zone.top { justify-content: flex-start; }
+.bar-zone.bottom { justify-content: flex-end; }
+.bar-zone.selectable { cursor: pointer; }
+.bar-zone.selectable .bar-checker {
+  outline: 3px solid var(--glow);
+  box-shadow: 0 0 14px var(--glow);
+}
+.bar-zone.selected .bar-checker {
+  outline: 3px solid var(--gold);
+  box-shadow: 0 0 16px var(--gold);
+}
+
+/* ---------- Points (triangles) ---------- */
+.bg-point {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: default;
+}
+/* the triangle itself, drawn behind the checkers */
+.bg-point::before {
+  content: '';
+  position: absolute;
+  left: 8%;
+  width: 84%;
+  height: 86%;
+  z-index: 0;
+}
+.bg-point.up::before {     /* bottom row, points up */
+  bottom: 0;
+  clip-path: polygon(0 100%, 100% 100%, 50% 0);
+}
+.bg-point.down::before {   /* top row, points down */
+  top: 0;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+.bg-point.c-light::before { background: linear-gradient(180deg, var(--pt-light), #b78d57); }
+.bg-point.c-dark::before  { background: linear-gradient(180deg, var(--pt-dark), #6b3415); }
+
+/* checkers stack from the pointed-base side */
+.bg-point.down { justify-content: flex-start; }
+.bg-point.up   { justify-content: flex-end; }
+
+/* selectable source / legal destination highlights */
+.bg-point.src-ok { cursor: pointer; }
+.bg-point.src-ok::after,
+.bg-point.dest-ok::after {
+  content: '';
+  position: absolute;
+  inset: 4%;
+  border-radius: 8px;
+  z-index: 3;
+  pointer-events: none;
+}
+.bg-point.src-ok::after {
+  border: 2px dashed var(--glow);
+  box-shadow: 0 0 12px rgba(56,225,255,0.5);
+}
+.bg-point.dest-ok::after {
+  border: 2px solid var(--glow-move);
+  box-shadow: 0 0 16px var(--glow-move);
+  animation: destPulse 1.1s ease-in-out infinite;
+}
+.bg-point.selected::after {
+  content: '';
+  position: absolute;
+  inset: 4%;
+  border-radius: 8px;
+  z-index: 3;
+  pointer-events: none;
+  border: 2px solid var(--gold);
+  box-shadow: 0 0 16px var(--gold);
+}
+@keyframes destPulse {
+  50% { box-shadow: 0 0 6px var(--glow-move); }
+}
+
+/* ---------- Checkers ---------- */
+.checker {
+  position: relative;
+  z-index: 2;
+  width: 84%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  margin: -2px 0;            /* overlap when stacked */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.55), inset 0 2px 4px rgba(255,255,255,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.62rem;
+  font-weight: 800;
+  color: rgba(0,0,0,0.55);
+}
+.checker.w {
+  background: radial-gradient(circle at 35% 30%, var(--checker-w-1), var(--checker-w-2));
+}
+.checker.b {
+  background: radial-gradient(circle at 35% 30%, var(--checker-b-1), var(--checker-b-2));
+  color: rgba(255,255,255,0.7);
+}
+.checker .count-badge {
+  font-size: 0.7rem;
+}
+.bg-point.down .checker { margin-top: 1px; }
+.bg-point.up .checker   { margin-bottom: 1px; }
+
+.bar-checker {
+  width: 30px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.6), inset 0 2px 4px rgba(255,255,255,0.25);
+}
+.bar-checker.w { background: radial-gradient(circle at 35% 30%, var(--checker-w-1), var(--checker-w-2)); }
+.bar-checker.b { background: radial-gradient(circle at 35% 30%, var(--checker-b-1), var(--checker-b-2)); }
+
+/* point number labels along the outer edge */
+.pt-label {
+  position: absolute;
+  font-size: 0.55rem;
+  color: rgba(255,255,255,0.4);
+  z-index: 4;
+}
+.bg-point.down .pt-label { top: 2px; }
+.bg-point.up .pt-label { bottom: 2px; }
+
+/* ---------- Dice ---------- */
+#dice { gap: 10px; align-items: center; }
+.die {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #fdfdfd, #d4d4d4);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4), inset 0 2px 4px rgba(255,255,255,0.6);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  padding: 6px;
+  position: relative;
+}
+.die.rolling { animation: dieShake 0.5s ease; }
+@keyframes dieShake {
+  0%,100% { transform: rotate(0); }
+  25% { transform: rotate(-12deg) translateY(-3px); }
+  75% { transform: rotate(12deg) translateY(-3px); }
+}
+.die .pip {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #1a1a1a;
+  align-self: center;
+  justify-self: center;
+}
+/* pip positions via grid-area helpers */
+.die .p-tl { grid-area: 1 / 1; }
+.die .p-tr { grid-area: 1 / 3; }
+.die .p-ml { grid-area: 2 / 1; }
+.die .p-mc { grid-area: 2 / 2; }
+.die .p-mr { grid-area: 2 / 3; }
+.die .p-bl { grid-area: 3 / 1; }
+.die .p-br { grid-area: 3 / 3; }
+.die.used {
+  opacity: 0.35;
+  filter: grayscale(1);
+}
+
+/* ---------- Bar / Off chips ---------- */
+#barOff .chip { display: inline-flex; align-items: center; gap: 5px; }
+.chip-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.chip-dot.w { background: radial-gradient(circle at 35% 30%, var(--checker-w-1), var(--checker-w-2)); }
+.chip-dot.b { background: radial-gradient(circle at 35% 30%, var(--checker-b-1), var(--checker-b-2)); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+  .bg-board { --board-w: 460px; padding: 8px; grid-template-columns: 1fr 30px 1fr; }
+  .bar-checker { width: 20px; }
+  .die { width: 38px; height: 38px; }
+  .die .pip { width: 7px; height: 7px; }
+  .pt-label { display: none; }
+}

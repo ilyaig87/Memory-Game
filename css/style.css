@@ -255,11 +255,28 @@ a {
 }
 
 .game-box1,
-.game-box2 {
+.game-box2,
+.game-box3,
+.game-box4,
+.game-box5,
+.game-box6 {
   display: flex;
   justify-content: center;
   align-content: center;
   text-align: center;
+}
+
+.emoji-cover {
+  display: block;
+  font-size: 130px;
+  line-height: 200px;
+  height: 200px;
+  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.4));
+  transition: transform 0.25s ease;
+}
+
+.games-box a:hover .emoji-cover {
+  transform: scale(1.12) rotate(-4deg);
 }
 
 .toggle-menu {
