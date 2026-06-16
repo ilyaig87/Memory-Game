@@ -68,11 +68,62 @@ body.game-page::after {
 @keyframes float1 { 50% { transform: translate(120px, 80px); } }
 @keyframes float2 { 50% { transform: translate(-100px, -70px); } }
 
-/* keep header/nav above blobs and recolour for dark bg */
-body.game-page header { position: relative; z-index: 5; }
-body.game-page .header-container h1,
-body.game-page .main-nav-list a { color: var(--ink) !important; }
-body.game-page .main-nav-list a:hover { color: var(--gold) !important; }
+/* ---------- Sticky glass navbar (all game-page screens) ---------- */
+body.game-page header.header-container {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  margin: 0 !important;        /* beat the .main-layout side-margin utility */
+  padding: 12px clamp(16px, 4vw, 40px);
+  align-items: center;
+  background: rgba(15, 12, 41, 0.55);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--panel-border);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+}
+body.game-page .text-logo {
+  width: auto !important;
+  margin: 0;
+  font-family: 'Segoe UI', system-ui, sans-serif !important;
+  font-size: 1.6rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.5px;
+  background: linear-gradient(90deg, var(--gold), var(--magenta), var(--cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+body.game-page .header-nav { width: auto; }
+body.game-page .main-nav-list { width: auto; gap: 4px; margin: 0; padding: 0; align-items: center; }
+body.game-page .main-nav-list a {
+  font-family: 'Segoe UI', system-ui, sans-serif !important;
+  font-size: 0.98rem !important;
+  font-weight: 700;
+  margin: 0;
+  padding: 8px 16px;
+  border-radius: 999px;
+  color: var(--ink-soft) !important;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+body.game-page .main-nav-list a:hover {
+  color: var(--ink) !important;
+  background: rgba(255, 255, 255, 0.10);
+}
+body.game-page .toggle-menu {
+  background: transparent;
+  border: 1px solid var(--panel-border);
+  color: var(--ink);
+  border-radius: 10px;
+  font-size: 1.3rem;
+  padding: 4px 12px;
+  cursor: pointer;
+}
+
+/* Center the page-content blocks (overrides the .main-layout side-margin utility) */
+body.game-page.main-layout > *:not(.full):not(.header-container) {
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+}
 
 /* ---------- Layout ---------- */
 .game-shell {
