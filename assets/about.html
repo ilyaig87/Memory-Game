@@ -7,11 +7,13 @@
 
     <link rel="stylesheet" href="../js/lib/bootstrap.css" />
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/games.css" />
+    <link rel="stylesheet" href="../css/site.css" />
     <link rel="icon" href="../img/favicon.png" />
 
-    <title>About</title>
+    <title>About — I-Games</title>
   </head>
-  <body class="main-layout">
+  <body class="main-layout game-page">
     <div class="main-screen full" onclick="toggleMenu()"></div>
 
     <header class="header-container flex space-between">
@@ -27,29 +29,54 @@
         <button class="toggle-menu" onclick="toggleMenu()">☰</button>
       </div>
     </header>
-    <main class="main-container flex center row">
-      <h1 class="text-logo">I-Games</h1>
-      <p class="my-about">
-        Welcome to our website about games! We are a team of gaming enthusiasts
-        who are passionate about all kinds of games, from classic board games to
-        the latest video game releases. On our website, you'll find a wide
-        variety of games for all ages and interests. We have everything from
-        educational games for kids to action-packed adventure games for adults.
-        No matter what kind of game you're looking for, we've got you covered.
-        In addition to our selection of games, we also offer reviews and
-        articles about the latest trends in the gaming world. Our team stays
-        up-to-date on all the latest releases and industry news, so you can
-        always find out what's new and exciting in the world of gaming. We hope
-        you enjoy exploring our website and discovering all the great games it
-        has to offer. If you have any questions or comments, please don't
-        hesitate to contact us. We'd love to hear from you!
+
+    <section class="home-hero">
+      <span class="kicker">★ About us ★</span>
+      <h1 style="font-size: clamp(2.6rem, 8vw, 4.5rem)">About I-Games</h1>
+      <p class="tagline">A little corner of the web built by people who love games.</p>
+    </section>
+
+    <div class="content-card glass">
+      <p>
+        Welcome to I-Games! We're a team of gaming enthusiasts who are
+        passionate about all kinds of games, from timeless board classics to
+        clever little browser challenges.
       </p>
-      <div>
-        <button class="contact-btn">
-          <a href="./contact.html"> Contact Us</a>
-        </button>
+      <p>
+        Everything here runs right in your browser — no downloads, no sign-ups,
+        no cost. We built each game by hand, and our Chess, Checkers and
+        Backgammon games feature a genuine, thinking AI opponent so you always
+        have a worthy challenge, even on your own.
+      </p>
+      <p>
+        We hope you enjoy exploring the collection. If you have questions,
+        comments or ideas, we'd love to hear from you.
+      </p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature glass">
+        <div class="fi">🤖</div>
+        <h3>Smart AI</h3>
+        <p>Real engines with minimax search and heuristics — not random moves.</p>
       </div>
-    </main>
+      <div class="feature glass">
+        <div class="fi">📱</div>
+        <h3>Plays Anywhere</h3>
+        <p>Responsive design that works on desktop, tablet and phone.</p>
+      </div>
+      <div class="feature glass">
+        <div class="fi">🎉</div>
+        <h3>Always Free</h3>
+        <p>No accounts, no paywalls. Just open a game and play.</p>
+      </div>
+    </div>
+
+    <div class="cta-row" style="margin: 36px 0 70px">
+      <a class="cta cta--primary" href="./more.html">▶ Browse Games</a>
+      <a class="cta" href="./contact.html">Contact Us</a>
+    </div>
+
     <script>
       function toggleMenu() {
         document.body.classList.toggle('menu-opened')

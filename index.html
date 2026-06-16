@@ -6,12 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <link rel="stylesheet" href="./js/lib/bootstrap.css" />
-    <link rel="icon" href="./img/favicon.png" />
     <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/games.css" />
+    <link rel="stylesheet" href="./css/gallery.css" />
+    <link rel="stylesheet" href="./css/site.css" />
+    <link rel="icon" href="./img/favicon.png" />
 
     <title>I-Games</title>
   </head>
-  <body class="main-layout">
+  <body class="main-layout game-page">
     <div class="main-screen full" onclick="toggleMenu()"></div>
 
     <header class="header-container flex space-between">
@@ -27,21 +30,74 @@
         <button class="toggle-menu" onclick="toggleMenu()">☰</button>
       </div>
     </header>
-    <main class="main-container flex center row">
-      <h1 class="text-logo">I-Games</h1>
-      <h1 class="my-about">Play much as you want! Free</h1>
-      <div>
-        <button class="contact-btn">
-          <a href="./assets/more.html"> Our Games</a>
-        </button>
+
+    <section class="home-hero">
+      <span class="kicker">★ Free to play · No sign-up ★</span>
+      <h1>I-GAMES</h1>
+      <p class="tagline">
+        Six handcrafted games in your browser — three powered by a real,
+        thinking AI. Pick one and play as much as you want.
+      </p>
+      <div class="cta-row">
+        <a class="cta cta--primary" href="./assets/more.html">▶ Play Now</a>
+        <a class="cta" href="./assets/about.html">Learn More</a>
       </div>
-    </main>
-    <script src="./js/lib/bootstrap.bundel.js"></script>
+
+      <div class="stats-strip">
+        <div class="stat glass"><div class="num">6</div><div class="label">Games</div></div>
+        <div class="stat glass"><div class="num">3</div><div class="label">Smart AI Opponents</div></div>
+        <div class="stat glass"><div class="num">100%</div><div class="label">Free</div></div>
+      </div>
+    </section>
+
+    <h2 class="section-title">Our Games</h2>
+    <section class="gallery-grid">
+      <a class="game-card" href="./assets/memory-game.html">
+        <span class="icon">🧠</span>
+        <h2>Memory Game</h2>
+        <p>Flip the cards and match every pair before you forget!</p>
+        <span class="play-cta">Play ▸</span>
+      </a>
+      <a class="game-card" href="./assets/tic-tac-toe.html">
+        <span class="icon">⭕</span>
+        <h2>Tic Tac Toe</h2>
+        <p>The timeless classic — get three in a row to win.</p>
+        <span class="play-cta">Play ▸</span>
+      </a>
+      <a class="game-card" href="./assets/mine-sweeper.html">
+        <span class="icon">💣</span>
+        <h2>Mine Sweeper</h2>
+        <p>Clear the field without triggering a single boom.</p>
+        <span class="play-cta">Play ▸</span>
+      </a>
+      <a class="game-card" href="./assets/chess.html">
+        <span class="ai-badge">SMART AI</span>
+        <span class="icon">♟️</span>
+        <h2>Chess</h2>
+        <p>Outsmart a real engine with full rules and strategy.</p>
+        <span class="play-cta">Play ▸</span>
+      </a>
+      <a class="game-card" href="./assets/checkers.html">
+        <span class="ai-badge">SMART AI</span>
+        <span class="icon">⛀</span>
+        <h2>Checkers</h2>
+        <p>Forced captures, multi-jumps and crowned kings.</p>
+        <span class="play-cta">Play ▸</span>
+      </a>
+      <a class="game-card" href="./assets/backgammon.html">
+        <span class="ai-badge">SMART AI</span>
+        <span class="icon">🎲</span>
+        <h2>Backgammon</h2>
+        <p>Roll the dice, race your checkers and bear off to win.</p>
+        <span class="play-cta">Play ▸</span>
+      </a>
+    </section>
 
     <script>
       function toggleMenu() {
         document.body.classList.toggle('menu-opened')
       }
     </script>
+    <script src="./js/lib/bootstrap.bundel.js"></script>
   </body>
 </html>
