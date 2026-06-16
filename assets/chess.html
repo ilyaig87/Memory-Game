@@ -59,6 +59,9 @@
           <button class="game-btn game-btn--primary" id="newGameBtn">New Game</button>
           <button class="game-btn" id="undoBtn">Undo</button>
         </div>
+        <div class="panel-actions">
+          <button class="game-btn" id="learnBtn" style="flex:1 1 100%">📖 Learn to Play</button>
+        </div>
         <div class="panel-section">
           <h3>Captured</h3>
           <div class="chips" id="captured"></div>
@@ -79,7 +82,32 @@
       </div>
     </div>
 
+    <!-- Learn-to-play overlay -->
+    <div class="learn-overlay hidden" id="learnOverlay">
+      <div class="learn-card glass">
+        <button class="learn-close" id="learnClose" title="Close">✕</button>
+        <h2 class="learn-title">♟ Learn Chess</h2>
+        <p class="learn-intro">
+          The goal: deliver <strong>checkmate</strong> — attack the enemy king
+          so it cannot escape. Click a piece to see how it moves.
+        </p>
+        <div class="learn-tabs" id="learnTabs"></div>
+        <div class="learn-body">
+          <div class="learn-diagram" id="learnDiagram"></div>
+          <div class="learn-text">
+            <h3 id="learnPieceName"></h3>
+            <p id="learnPieceDesc"></p>
+          </div>
+        </div>
+        <div class="learn-rules">
+          <h3>Special rules</h3>
+          <ul id="learnRules"></ul>
+        </div>
+      </div>
+    </div>
+
     <script src="../js/utils/game-ui.js"></script>
     <script src="../js/chess.js"></script>
+    <script src="../js/chess-learn.js"></script>
   </body>
 </html>
