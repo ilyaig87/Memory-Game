@@ -16,20 +16,8 @@
     <title>I-Games — Play smart board games free</title>
   </head>
   <body class="main-layout game-page landing">
-    <div class="main-screen full" onclick="toggleMenu()"></div>
-
-    <header class="header-container flex space-between">
-      <h1 class="text-logo flex center">I-Games</h1>
-      <div class="flex center">
-        <nav class="header-nav">
-          <ul class="main-nav-list flex">
-            <li><a data-scroll href="#home"> Home</a></li>
-            <li><a data-scroll href="#games"> Games</a></li>
-            <li><a data-scroll href="#about"> About</a></li>
-          </ul>
-        </nav>
-        <button class="toggle-menu" onclick="toggleMenu()">☰</button>
-      </div>
+    <header class="header-container flex">
+      <h1 class="text-logo flex center" onclick="goHome()" title="Back to home">I-Games</h1>
     </header>
 
     <!-- ===== HERO ===== -->
@@ -42,7 +30,7 @@
       <h1>I-GAMES</h1>
       <p class="tagline">
         Six handcrafted games in one place — three powered by a real, thinking
-        AI. No downloads, no routing, just press play.
+        AI. No downloads, no sign-up, just press play.
       </p>
       <div class="cta-row">
         <a class="cta cta--primary" data-scroll href="#games">▶ Play Now</a>
@@ -144,8 +132,11 @@
     <!-- ===== GAME MODAL ===== -->
     <div class="game-modal" id="gameModal" aria-hidden="true">
       <div class="game-modal__bar">
+        <button class="game-modal__home" onclick="backHome()" title="Back to home">
+          ‹ I-Games
+        </button>
         <span class="game-modal__title" id="gameModalTitle"></span>
-        <button class="game-modal__close" onclick="closeGame()">✕ Close</button>
+        <button class="game-modal__close" onclick="backHome()">✕ Close</button>
       </div>
       <div class="game-modal__stage">
         <div class="game-modal__spinner" aria-hidden="true"></div>

@@ -16,18 +16,52 @@ const GAMES = {
   backgammon: { title: '🎲 Backgammon',   src: 'assets/backgammon.html' },
 }
 
+/* ---------- Hash routing ----------
+   Each game lives at the route #play/<key>, so the browser URL reflects
+   the open game and the native Back button closes it. There is no server
+   routing — everything stays in this single page. */
+let currentGame = null
+
+// Card click / programmatic open: navigate to the game's route.
 function openGame(key) {
+  if (!GAMES[key]) return
+  location.hash = '#play/' + key
+}
+
+// Leaving a game: pop the route if we're on one (so Back history is clean),
+// otherwise just make sure the modal is closed.
+function backHome() {
+  if (/^#play\//.test(location.hash)) {
+    history.back()
+  } else {
+    actuallyClose()
+  }
+}
+
+// Logo click: return home from a game, or scroll to top on the landing.
+function goHome() {
+  if (/^#play\//.test(location.hash)) backHome()
+  else window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
+// React to the URL: open the matching game, or close if it's not a game route.
+function handleRoute() {
+  const m = location.hash.match(/^#play\/(\w+)$/)
+  if (m && GAMES[m[1]]) actuallyOpen(m[1])
+  else actuallyClose()
+}
+
+function actuallyOpen(key) {
+  if (currentGame === key) return
+  currentGame = key
   const game = GAMES[key]
-  if (!game) return
   const modal = document.getElementById('gameModal')
   const frame = document.getElementById('gameFrame')
-  const title = document.getElementById('gameModalTitle')
+  document.getElementById('gameModalTitle').textContent = game.title
 
-  title.textContent = game.title
   frame.classList.remove('ready')
-
   frame.onload = () => {
-    // same-origin: hide the embedded page's own navbar for a clean modal view
+    // same-origin: hide the embedded page's own navbar for a clean view
     try {
       frame.contentDocument.documentElement.classList.add('embedded')
     } catch (e) {
@@ -35,32 +69,36 @@ function openGame(key) {
     }
     frame.classList.add('ready')
   }
-  // reload fresh each time so the game resets
-  frame.src = game.src
+  frame.src = game.src // fresh load each time so the game resets
 
   document.body.classList.add('modal-open')
   modal.classList.add('open')
   modal.setAttribute('aria-hidden', 'false')
 }
 
-function closeGame() {
+function actuallyClose() {
+  if (currentGame === null) return
+  currentGame = null
   const modal = document.getElementById('gameModal')
   const frame = document.getElementById('gameFrame')
   modal.classList.remove('open')
   modal.setAttribute('aria-hidden', 'true')
   document.body.classList.remove('modal-open')
-  // unload the game to stop timers/AI loops
-  setTimeout(() => { frame.src = 'about:blank' }, 320)
+  setTimeout(() => { frame.src = 'about:blank' }, 320) // stop timers/AI loops
 }
 
 function toggleMenu() {
   document.body.classList.toggle('menu-opened')
 }
 
+window.addEventListener('hashchange', handleRoute)
+
 document.addEventListener('DOMContentLoaded', () => {
-  // Close modal on Escape or backdrop bar click
+  handleRoute() // honor a deep-link like ...#play/chess on first load
+
+  // Escape leaves the current game
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeGame()
+    if (e.key === 'Escape') backHome()
   })
 
   // Smooth-scroll nav + close mobile menu after click

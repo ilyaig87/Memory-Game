@@ -39,6 +39,10 @@ let board = []
 let turn = RED            // whose turn it is
 let mode = 'ai'           // 'ai' or 'pvp'
 let aiDepth = 5
+// Variant rule: may a regular man capture BACKWARD while continuing a
+// multi-jump chain? (English draughts = false; this option = true so a
+// piece mid-chain can turn back and the game gets "stuck" less often.)
+let backwardJump = true
 let selected = null       // index of the selected square
 let legalForSelected = [] // moves available from the selected square
 let chainPiece = null     // index of a piece mid multi-jump (must continue)
@@ -80,6 +84,19 @@ function directions(piece) {
   return [[-1, -1], [-1, 1], [1, -1], [1, 1]]
 }
 
+// Diagonals a piece may CAPTURE along. Men normally jump forward only;
+// when the backwardJump option is on, a man continuing a multi-jump
+// (isContinuation) may also jump backward. Kings always jump all ways.
+function captureDirections(piece, isContinuation) {
+  if (isKing(piece)) return [[-1, -1], [-1, 1], [1, -1], [1, 1]]
+  const fwd = piece === RED_MAN ? [[-1, -1], [-1, 1]] : [[1, -1], [1, 1]]
+  if (backwardJump && isContinuation) {
+    const back = piece === RED_MAN ? [[1, -1], [1, 1]] : [[-1, -1], [-1, 1]]
+    return fwd.concat(back)
+  }
+  return fwd
+}
+
 // Generate every capture chain starting from one piece on a board.
 // Returns full-chain moves (multi-jumps collapsed into one move).
 function captureMovesFrom(b, idx) {
@@ -95,7 +112,9 @@ function captureMovesFrom(b, idx) {
     const c = curIdx % 8
     let extended = false
 
-    for (const [dr, dc] of directions(curPiece)) {
+    // backward jumps allowed only when continuing a chain (option-gated)
+    const isContinuation = capturedList.length > 0
+    for (const [dr, dc] of captureDirections(curPiece, isContinuation)) {
       const mr = r + dr      // square being jumped over
       const mc = c + dc
       const lr = r + dr * 2  // landing square
@@ -577,6 +596,20 @@ function wire() {
     activateSeg(diffSeg, btn)
     aiDepth = parseInt(btn.dataset.depth, 10)
   })
+
+  const backSeg = document.getElementById('backSeg')
+  if (backSeg) {
+    backSeg.addEventListener('click', (e) => {
+      const btn = e.target.closest('.seg-btn')
+      if (!btn) return
+      activateSeg(backSeg, btn)
+      backwardJump = btn.dataset.back === 'on'
+      // re-evaluate the current selection under the new rule
+      selected = null
+      legalForSelected = []
+      render()
+    })
+  }
 }
 
 wire()
