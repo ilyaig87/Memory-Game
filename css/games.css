@@ -119,6 +119,13 @@ body.game-page .toggle-menu {
   cursor: pointer;
 }
 
+/* When a game page is embedded inside the landing-page modal (iframe),
+   hide its own navbar and tighten the top spacing. */
+html.embedded body.game-page header.header-container { display: none !important; }
+html.embedded body.game-page .game-shell { padding-top: 14px; }
+html.embedded body.game-page .home-hero,
+html.embedded body.game-page .gallery-hero { padding-top: 18px; }
+
 /* Center the page-content blocks (overrides the .main-layout side-margin utility) */
 body.game-page.main-layout > *:not(.full):not(.header-container) {
   margin-inline-start: auto;
