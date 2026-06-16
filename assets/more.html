@@ -7,10 +7,12 @@
 
     <link rel="stylesheet" href="../js/lib/bootstrap.css" />
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/games.css" />
+    <link rel="stylesheet" href="../css/gallery.css" />
     <link rel="icon" href="../img/favicon.png" />
     <title>More Games</title>
   </head>
-  <body class="main-layout">
+  <body class="main-layout game-page">
     <div class="main-screen full" onclick="toggleMenu()"></div>
 
     <header class="header-container flex space-between">
@@ -26,65 +28,60 @@
         <button class="toggle-menu" onclick="toggleMenu()">☰</button>
       </div>
     </header>
-    <section class="games-container">
-      <h1>More of our Games</h1>
-      <div class="games grid">
-        <article class="games-box">
-          <div class="game-box1">
-            <a href="memory-game.html">
-              <h2>Memory Game</h2>
-              <p>Do you think you can handle it?!</p>
-              <img class="img-game" src="../img/Memory.png" alt="" />
-            </a>
-          </div>
-        </article>
-        <article class="games-box">
-          <div class="game-box2">
-            <a href="tic-tac-toe.html">
-              <h2>Tic Tac Toe</h2>
-              <p>The game is very popular</p>
-              <img class="img-game" src="../img/tic.jpg" alt="" />
-            </a>
-          </div>
-        </article>
-        <article class="games-box">
-          <div class="game-box3">
-            <a href="mine-sweeper.html">
-              <h2>Mine Sweeper</h2>
-              <p>What a classic game!</p>
-              <img class="img-game" src="../img/mine.png" alt="" />
-            </a>
-          </div>
-        </article>
-        <article class="games-box">
-          <div class="game-box4">
-            <a href="chess.html">
-              <h2>Chess</h2>
-              <p>Outsmart a real engine!</p>
-              <span class="emoji-cover">♟️</span>
-            </a>
-          </div>
-        </article>
-        <article class="games-box">
-          <div class="game-box5">
-            <a href="checkers.html">
-              <h2>Checkers</h2>
-              <p>Forced captures &amp; kings!</p>
-              <span class="emoji-cover">⛀</span>
-            </a>
-          </div>
-        </article>
-        <article class="games-box">
-          <div class="game-box6">
-            <a href="backgammon.html">
-              <h2>Backgammon</h2>
-              <p>Roll, race &amp; bear off!</p>
-              <span class="emoji-cover">🎲</span>
-            </a>
-          </div>
-        </article>
-      </div>
+
+    <section class="gallery-hero">
+      <span class="kicker">★ Pick your challenge ★</span>
+      <h1>Our Games</h1>
+      <p>Six handcrafted games — three of them powered by a real, thinking AI.</p>
     </section>
+
+    <section class="gallery-grid">
+      <a class="game-card" href="memory-game.html">
+        <span class="icon">🧠</span>
+        <h2>Memory Game</h2>
+        <p>Flip the cards and match every pair before you forget!</p>
+        <span class="play-cta">Play ▸</span>
+      </a>
+
+      <a class="game-card" href="tic-tac-toe.html">
+        <span class="icon">⭕</span>
+        <h2>Tic Tac Toe</h2>
+        <p>The timeless classic — get three in a row to win.</p>
+        <span class="play-cta">Play ▸</span>
+      </a>
+
+      <a class="game-card" href="mine-sweeper.html">
+        <span class="icon">💣</span>
+        <h2>Mine Sweeper</h2>
+        <p>Clear the field without triggering a single boom.</p>
+        <span class="play-cta">Play ▸</span>
+      </a>
+
+      <a class="game-card" href="chess.html">
+        <span class="ai-badge">SMART AI</span>
+        <span class="icon">♟️</span>
+        <h2>Chess</h2>
+        <p>Outsmart a real engine with full rules and strategy.</p>
+        <span class="play-cta">Play ▸</span>
+      </a>
+
+      <a class="game-card" href="checkers.html">
+        <span class="ai-badge">SMART AI</span>
+        <span class="icon">⛀</span>
+        <h2>Checkers</h2>
+        <p>Forced captures, multi-jumps and crowned kings.</p>
+        <span class="play-cta">Play ▸</span>
+      </a>
+
+      <a class="game-card" href="backgammon.html">
+        <span class="ai-badge">SMART AI</span>
+        <span class="icon">🎲</span>
+        <h2>Backgammon</h2>
+        <p>Roll the dice, race your checkers and bear off to win.</p>
+        <span class="play-cta">Play ▸</span>
+      </a>
+    </section>
+
     <script>
       function toggleMenu() {
         document.body.classList.toggle('menu-opened')
