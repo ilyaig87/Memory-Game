@@ -1,0 +1,148 @@
+/* ============================================================
+   I-GAMES — Single-page landing
+   Sections, hero decor, fullscreen game modal, footer.
+   Builds on games.css (theme) + gallery.css (cards) + site.css.
+   ============================================================ */
+
+html { scroll-behavior: smooth; }
+body.landing { scroll-padding-top: 80px; }
+
+/* anchor offset so sticky navbar doesn't cover section titles */
+.landing-section {
+  position: relative;
+  z-index: 2;
+  scroll-margin-top: 84px;
+  padding: 40px 20px 30px;
+}
+.landing-section > .section-title { margin-top: 0; }
+
+/* active nav link */
+body.landing .main-nav-list a.active {
+  color: var(--ink) !important;
+  background: linear-gradient(135deg, rgba(56,225,255,0.22), rgba(255,95,162,0.22));
+}
+
+/* ---------- Hero decor: floating game glyphs ---------- */
+.hero-decor { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 1; }
+.hero-decor span {
+  position: absolute;
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  opacity: 0.18;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.5));
+  animation: floatGlyph 9s ease-in-out infinite;
+}
+.hero-decor span:nth-child(1) { left: 6%;  top: 22%; animation-delay: 0s; }
+.hero-decor span:nth-child(2) { left: 16%; top: 64%; animation-delay: 1.2s; }
+.hero-decor span:nth-child(3) { right: 9%; top: 26%; animation-delay: 0.6s; }
+.hero-decor span:nth-child(4) { right: 18%;top: 68%; animation-delay: 1.8s; }
+.hero-decor span:nth-child(5) { left: 46%; top: 12%; animation-delay: 2.4s; }
+.hero-decor span:nth-child(6) { right: 40%;top: 80%; animation-delay: 0.3s; }
+@keyframes floatGlyph {
+  0%, 100% { transform: translateY(0) rotate(-6deg); }
+  50%      { transform: translateY(-22px) rotate(6deg); }
+}
+
+/* keep hero text above decor */
+.home-hero > *:not(.hero-decor) { position: relative; z-index: 2; }
+
+/* Make the gallery cards behave as buttons (they open the modal) */
+.game-card { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.game-card:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+
+/* ---------- Section divider flourish ---------- */
+.section-title::after {
+  content: '';
+  display: block;
+  width: 72px;
+  height: 4px;
+  margin: 12px auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--gold), var(--magenta), var(--cyan));
+}
+
+/* ---------- Fullscreen game modal ---------- */
+.game-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  background: rgba(8, 6, 24, 0.92);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.game-modal.open { opacity: 1; pointer-events: auto; }
+.game-modal__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px clamp(14px, 4vw, 32px);
+  border-bottom: 1px solid var(--panel-border);
+  background: rgba(15, 12, 41, 0.6);
+}
+.game-modal__title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, var(--gold), var(--magenta), var(--cyan));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.game-modal__close {
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--panel-border);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--ink);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+.game-modal__close:hover { background: var(--red); transform: translateY(-1px); }
+.game-modal__stage {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+.game-modal__frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  opacity: 0;
+  transform: scale(0.985);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.game-modal__frame.ready { opacity: 1; transform: scale(1); }
+.game-modal__spinner {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 54px; height: 54px;
+  margin: -27px 0 0 -27px;
+  border: 4px solid rgba(255, 255, 255, 0.15);
+  border-top-color: var(--cyan);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+body.modal-open { overflow: hidden; }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 30px 20px 40px;
+  color: var(--ink-soft);
+  border-top: 1px solid var(--panel-border);
+  background: rgba(15, 12, 41, 0.4);
+}
+.site-footer .foot-logo {
+  font-weight: 900;
+  font-size: 1.3rem;
+  background: linear-gradient(90deg, var(--gold), var(--magenta), var(--cyan));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.site-footer p { margin: 8px 0 0; font-size: 0.9rem; }
